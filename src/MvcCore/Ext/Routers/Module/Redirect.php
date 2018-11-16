@@ -25,10 +25,10 @@ trait Redirect
 		/** @var $req \MvcCore\Request */
 		$request = & $this->request;
 		
-		// get domain with base path url section, 
-		// path with query string url section 
-		// system params for url prefixes
-		// and if path with query string url section targeting `/` or `/index.php`
+		// get domain with base path URL section, 
+		// path with query string URL section 
+		// system params for URL prefixes
+		// and if path with query string URL section targeting `/` or `/index.php`
 		$targetModule = NULL;
 		$domainParamsDefault = [];
 		$domainParams = [];
@@ -38,7 +38,7 @@ trait Redirect
 		}
 
 		if ($targetModule !== NULL) {
-			// remove domain module params and complete url address base part by module domain
+			// remove domain module params and complete URL address base part by module domain
 			$domainParams = array_intersect_key($systemParams, $domainParamsDefault);
 			//$systemParamsClone = array_diff_key($systemParams, $domainParamsDefault);
 			$defaultDomainParams = array_merge([], $this->GetDefaultParams() ?: []);

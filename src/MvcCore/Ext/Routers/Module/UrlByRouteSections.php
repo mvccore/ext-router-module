@@ -21,7 +21,7 @@ trait UrlByRouteSections
 		if ($urlParamRouteName == 'self') 
 			$params = array_merge($this->requestedParams ?: [], $params);
 		
-		// complete by given route base url address part and part with path and query string
+		// complete by given route base URL address part and part with path and query string
 		list($urlBaseSection, $urlPathWithQuerySection) = $route->Url(
 			$this->request, $params, $defaultParams, $this->getQueryStringParamsSepatator()
 		);

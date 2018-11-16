@@ -43,7 +43,7 @@ trait UrlDomain
 	}
 
 	protected function urlGetDomainUrlAndClasifyParamsAndDomainParams (array & $params, array & $domainParamsDefault, & $targetDomainRoute) {
-		// remove domain module params and complete url address base part by module domain
+		// remove domain module params and complete URL address base part by module domain
 		$domainParams = array_intersect_key($params, $domainParamsDefault);
 		$params = array_diff_key($params, $domainParamsDefault);
 		$defaultDomainParams = array_merge([], $this->GetDefaultParams() ?: []);
