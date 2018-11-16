@@ -33,7 +33,7 @@ trait UrlBuilding
 		}
 		// filter params
 		list(,$filteredParams) = $this->Filter($allParamsClone, $defaultUrlParams, \MvcCore\IRoute::CONFIG_FILTER_OUT);
-		// convert all domain param values to lowercase
+		// convert all domain param values to lower case
 		$router = & $this->router;
 		foreach ($filteredParams as $paramName => & $paramValue) {
 			if ($paramName == $router::URL_PARAM_BASEPATH) continue;

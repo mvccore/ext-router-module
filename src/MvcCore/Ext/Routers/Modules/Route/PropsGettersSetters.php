@@ -75,7 +75,7 @@ trait PropsGettersSetters
 	}
 
 	/**
-	 * @var string $allowedLocalizations..., International lowercase language code(s) (+ optinally dash character + uppercase international locale code(s))
+	 * @var string $allowedLocalizations..., International lower case language code(s) (+ optionally dash character + upper case international locale code(s))
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
 	public function & SetAllowedLocalizations (/* ...$allowedLocalizations */) {
