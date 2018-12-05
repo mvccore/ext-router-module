@@ -23,8 +23,9 @@ trait UrlDomain
 			$moduleParamName = static::URL_PARAM_MODULE;
 			$targetModule = $params[$moduleParamName];
 			if (!isset($this->domainRoutes[$targetModule])) {
+				$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
 				throw new \InvalidArgumentException(
-					"[".__CLASS__."] No domain route defined for module: `$targetModule`."
+					"[".$selfClass."] No domain route defined for module: `$targetModule`."
 				);
 			} else {
 				$targetDomainRoute = $this->domainRoutes[$targetModule];

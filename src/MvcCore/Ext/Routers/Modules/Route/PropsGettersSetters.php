@@ -188,7 +188,7 @@ trait PropsGettersSetters
 	}
 
 	protected function trriggerUnusedMethodError ($method) {
-		$cls = __CLASS__;
-		trigger_error("[$cls] The method `$method` is not used in the extended `$cls` class.", E_USER_WARNING);
+		$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+		trigger_error("[$selfClass] The method `$method` is not used in this extended class.", E_USER_WARNING);
 	}
 }

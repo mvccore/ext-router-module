@@ -17,10 +17,13 @@ trait Matching
 {
 	protected function matchesGetSubject (\MvcCore\IRequest & $request) {
 		$subject = $this->matchesGetSubjectHostAndBase($request) ;
-		if (!$this->flags[0]) throw new \InvalidArgumentException(
-			"[".__CLASS__."] Domain route pattern or reverse must be defined as "
-			."absolute with `//`, `http://` or `https://` at the beginning (`//www.domain.com`)."	
-		);
+		if (!$this->flags[0]) {
+			$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+			throw new \InvalidArgumentException(
+				"[".$selfClass."] Domain route pattern or reverse must be defined as "
+				."absolute with `//`, `http://` or `https://` at the beginning (`//www.domain.com`)."	
+			);
+		}
 		return $subject;
 	}
 

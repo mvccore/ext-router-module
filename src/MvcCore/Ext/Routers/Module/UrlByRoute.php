@@ -49,10 +49,13 @@ trait UrlByRoute
 		if (
 			$route->GetAbsolute() && $moduleParamDefined && $currentDomainRouteMatched &&
 			$params[$moduleParamName] !== $this->requestedDomainParams[$moduleParamName]
-		) throw new \InvalidArgumentException(
-			"[".__CLASS__."] It's not possible to create URL address "
-			."to different module/domain for route defined as absolute."
-		);
+		) {
+			$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+			throw new \InvalidArgumentException(
+				"[".$selfClass."] It's not possible to create URL address "
+				."to different module/domain for route defined as absolute."
+			);
+		}
 
 		list ($targetModule, $targetDomainRoute, $domainParamsDefault) = $this->urlGetDomainRouteAndDefaultDomainParams(
 			$params, $moduleParamDefined, $currentDomainRouteMatched

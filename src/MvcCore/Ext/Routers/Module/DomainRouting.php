@@ -19,7 +19,8 @@ trait DomainRouting
 	protected function domainRouting () {
 		$request = & $this->request;
 		if ($this->routeGetRequestsOnly) {
-			trigger_error("[".__CLASS__."] Routing only GET requests with special media "
+			$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+			trigger_error("[".$selfClass."] Routing only GET requests with special media "
 			."site version or localization conditions is not allowed in module router.", 
 			E_USER_WARNING);
 			$this->routeGetRequestsOnly = FALSE;

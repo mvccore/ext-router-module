@@ -37,19 +37,25 @@ trait RouteMethods
 			if ($route instanceof \MvcCore\Ext\Routers\Modules\IRoute) {
 				if ($numericKey) {
 					$routeModule = $route->GetModule();
-					if ($routeModule === NULL) throw new \InvalidArgumentException(
-						"[".__CLASS__."] Domain route cannot be configured without module "
-						."record or without alphanumeric key in given routes collection."
-					);
+					if ($routeModule === NULL) {
+						$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+						throw new \InvalidArgumentException(
+							"[".$selfClass."] Domain route cannot be configured without module "
+							."record or without alphanumeric key in given routes collection."
+						);
+					}
 				}
 				$this->AddDomainRoute(
 					$route, $prepend, $throwExceptionForDuplication
 				);
 			} else {
-				if ($numericKey) throw new \InvalidArgumentException(
-					"[".__CLASS__."] Domain route cannot be configured without "
-					."alphanumeric key (representing module) in given routes collection."
-				);
+				if ($numericKey) {
+					$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+					throw new \InvalidArgumentException(
+						"[".$selfClass."] Domain route cannot be configured without "
+						."alphanumeric key (representing module) in given routes collection."
+					);
+				}
 				if (is_array($route)) {
 					if (!isset($route['module'])) $route['module'] = $key;
 					$this->AddDomainRoute(
@@ -66,8 +72,9 @@ trait RouteMethods
 						$prepend, $throwExceptionForDuplication
 					);
 				} else {
+					$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
 					throw new \InvalidArgumentException (
-						"[".__CLASS__."] Route is not possible to assign "
+						"[".$selfClass."] Route is not possible to assign "
 						."(key: \"$key\", value: " . serialize($route) . ")."
 					);
 				}
@@ -80,11 +87,13 @@ trait RouteMethods
 	public function & AddDomainRoute ($routeCfgOrRoute, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
 		$instance = & $this->getRouteDomainInstance($routeCfgOrRoute);
 		$routeModule = $instance->GetModule();
-		if (isset($this->domainRoutes[$routeModule]) && $throwExceptionForDuplication) 
+		if (isset($this->domainRoutes[$routeModule]) && $throwExceptionForDuplication) {
+			$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
 			throw new \InvalidArgumentException(
-				"[".__CLASS__."] Route with module name `.$routeModule.` "
+				"[".$selfClass."] Route with module name `.$routeModule.` "
 				."has already been defined between router domain routes."
 			);
+		}
 		if ($prepend) {
 			$newItem = [$routeModule => $instance];
 			$this->domainRoutes = $newItem + $this->routes;
