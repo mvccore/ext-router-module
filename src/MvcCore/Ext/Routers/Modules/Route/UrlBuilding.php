@@ -25,7 +25,7 @@ trait UrlBuilding
 			$emptyReverseParams = array_fill_keys(array_keys($this->reverseParams), '');
 			$allMergedParams = array_merge($this->defaults, $defaultUrlParams, $params);
 			// all params clone contains only keys necessary to build reverse 
-			// patern for this route and all given `$params` keys, nothing more 
+			// pattern for this route and all given `$params` keys, nothing more 
 			// from currently requested URL
 			$allParamsClone = array_merge(
 				$emptyReverseParams, array_intersect_key($allMergedParams, $emptyReverseParams), $params

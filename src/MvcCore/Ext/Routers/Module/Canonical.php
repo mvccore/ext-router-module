@@ -16,10 +16,10 @@ namespace MvcCore\Ext\Routers\Module;
 trait Canonical
 {
 	protected function canonicalRedirectQueryStringStrategy () {
-		/** @var $req \MvcCore\Request */
-		$req = & $this->request;
+		/** @var $request \MvcCore\Request */
+		$request = & $this->request;
 		$redirectToCanonicalUrl = FALSE;
-		$requestGlobalGet = & $req->GetGlobalCollection('get');
+		$requestGlobalGet = & $request->GetGlobalCollection('get');
 		$requestedCtrlDc = isset($requestGlobalGet['controller']) ? $requestGlobalGet['controller'] : NULL;
 		$requestedActionDc = isset($requestGlobalGet['action']) ? $requestGlobalGet['action'] : NULL;
 		$toolClass = self::$toolClass;
@@ -43,10 +43,10 @@ trait Canonical
 				$this->request, $domainParams, $this->requestedDomainParams, ''
 			);
 			if (mb_strpos($domainUrlBaseSection, '//') === FALSE)
-				$domainUrlBaseSection = $req->GetDomainUrl() . $domainUrlBaseSection;
-			if (mb_strlen($domainUrlBaseSection) > 0 && $domainUrlBaseSection !== $req->GetBaseUrl()) 
+				$domainUrlBaseSection = $request->GetDomainUrl() . $domainUrlBaseSection;
+			if (mb_strlen($domainUrlBaseSection) > 0 && $domainUrlBaseSection !== $request->GetBaseUrl()) 
 				$redirectToCanonicalUrl = TRUE;
-			//x([$domainUrlBaseSection, $req->GetBaseUrl()]);
+			//x([$domainUrlBaseSection, $request->GetBaseUrl()]);
 		}
 		if ($redirectToCanonicalUrl) {
 			$selfCanonicalUrl = $this->UrlByQueryString($this->selfRouteName, $requestedParamsClone);	
@@ -57,8 +57,8 @@ trait Canonical
 	}
 
 	protected function canonicalRedirectRewriteRoutesStrategy () {
-		/** @var $req \MvcCore\Request */
-		$req = & $this->request;
+		/** @var $request \MvcCore\Request */
+		$request = & $this->request;
 		$redirectToCanonicalUrl = FALSE;
 		$defaultParams =  $this->GetDefaultParams() ?: [];
 		if ($this->currentDomainRoute !== NULL) {
@@ -70,13 +70,13 @@ trait Canonical
 				$this->request, $domainParams, $defaultParams, ''
 			);
 			list($selfUrlDomainAndBasePart, $selfUrlPathAndQueryPart) = $this->currentRoute->Url(
-				$req, $requestedParamsClone, $defaultParamsClone, $this->getQueryStringParamsSepatator()
+				$request, $requestedParamsClone, $defaultParamsClone, $this->getQueryStringParamsSepatator()
 			);
 			if (mb_strpos($domainUrlBaseSection, '//') === FALSE)
-				$domainUrlBaseSection = $req->GetDomainUrl() . $domainUrlBaseSection;
-			if (mb_strlen($domainUrlBaseSection) > 0 && $domainUrlBaseSection !== $req->GetBaseUrl()) 
+				$domainUrlBaseSection = $request->GetDomainUrl() . $domainUrlBaseSection;
+			if (mb_strlen($domainUrlBaseSection) > 0 && $domainUrlBaseSection !== $request->GetBaseUrl()) 
 				$redirectToCanonicalUrl = TRUE;
-			//x([1, $domainUrlBaseSection, $req->GetBaseUrl()]);
+			//x([1, $domainUrlBaseSection, $request->GetBaseUrl()]);
 
 		} else {
 			$domainUrlBaseSection = NULL;
@@ -84,18 +84,18 @@ trait Canonical
 				$req, $this->requestedParams, $defaultParams, $this->getQueryStringParamsSepatator()
 			);
 			if (mb_strpos($selfUrlDomainAndBasePart, '//') === FALSE)
-				$selfUrlDomainAndBasePart = $req->GetDomainUrl() . $selfUrlDomainAndBasePart;
-			if (mb_strlen($selfUrlDomainAndBasePart) > 0 && $selfUrlDomainAndBasePart !== $req->GetBaseUrl()) 
+				$selfUrlDomainAndBasePart = $request->GetDomainUrl() . $selfUrlDomainAndBasePart;
+			if (mb_strlen($selfUrlDomainAndBasePart) > 0 && $selfUrlDomainAndBasePart !== $request->GetBaseUrl()) 
 				$redirectToCanonicalUrl = TRUE;
-			//x([2, $selfUrlDomainAndBasePart, $req->GetBaseUrl()]);
+			//x([2, $selfUrlDomainAndBasePart, $request->GetBaseUrl()]);
 		}
 		
 		if (mb_strlen($selfUrlPathAndQueryPart) > 0) {
-			$path = $req->GetPath(TRUE);
+			$path = $request->GetPath(TRUE);
 			$requestedUrl = $path === '' ? '/' : $path ;
 			if (mb_strpos($selfUrlPathAndQueryPart, '?') !== FALSE) {
 				$selfUrlPathAndQueryPart = rawurldecode($selfUrlPathAndQueryPart);
-				$requestedUrl .= $req->GetQuery(TRUE, TRUE);
+				$requestedUrl .= $request->GetQuery(TRUE, TRUE);
 			}
 			//x([3, $selfUrlPathAndQueryPart, $requestedUrl]);
 			if ($selfUrlPathAndQueryPart !== $requestedUrl) 

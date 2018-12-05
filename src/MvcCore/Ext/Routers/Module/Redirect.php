@@ -22,7 +22,7 @@ trait Redirect
 	 * @return bool
 	 */
 	protected function redirectToVersion ($systemParams) {
-		/** @var $req \MvcCore\Request */
+		/** @var $request \MvcCore\Request */
 		$request = & $this->request;
 		
 		// get domain with base path URL section, 

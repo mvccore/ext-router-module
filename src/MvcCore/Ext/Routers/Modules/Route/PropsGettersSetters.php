@@ -47,6 +47,7 @@ trait PropsGettersSetters
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
 	public function & SetModule ($module) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		$this->module = $module;
 		return $this;
 	}
@@ -63,6 +64,7 @@ trait PropsGettersSetters
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
 	public function & SetNamespace ($namespace) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		$this->namespace = $namespace;
 		return $this;
 	}
@@ -79,6 +81,7 @@ trait PropsGettersSetters
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
 	public function & SetAllowedLocalizations (/* ...$allowedLocalizations */) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		$allowedLocalizations = func_get_args();
 		if (count($allowedLocalizations) === 1 && is_array($allowedLocalizations[0])) 
 			$allowedLocalizations = $allowedLocalizations[0];
@@ -98,6 +101,7 @@ trait PropsGettersSetters
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
 	public function & SetAllowedMediaVersions ($allowedMediaVersionsAndUrlValues = []) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		$this->allowedMediaVersions = $allowedMediaVersionsAndUrlValues;
 		return $this;
 	}
