@@ -15,7 +15,7 @@ namespace MvcCore\Ext\Routers\Modules\Route;
 
 trait UrlBuilding
 {
-	public function Url (\MvcCore\IRequest & $request, array & $params = [], array & $defaultUrlParams = [], $queryStringParamsSepatator = '&') {
+	public function Url (\MvcCore\IRequest & $request, array & $params = [], array & $defaultUrlParams = [], $queryStringParamsSepatator = '&', $splitUrl = FALSE) {
 		// check reverse initialization
 		if ($this->reverseParams === NULL) $this->initReverse();
 		// complete and filter all params to build reverse pattern
@@ -49,6 +49,6 @@ trait UrlBuilding
 			$filteredParams, 
 			$this->defaults
 		);
-		return $this->urlSplitResultToBaseAndPathWithQuery($request, $result, $domainPercentageParams);
+		return $this->urlAbsPartAndSplit($request, $result, $domainPercentageParams, $splitUrl);
 	}
 }

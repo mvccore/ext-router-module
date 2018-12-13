@@ -40,7 +40,7 @@ trait Canonical
 			$domainParams = array_intersect_key($requestedParamsClone, $this->requestedDomainParams);
 			$requestedParamsClone = array_diff_key($requestedParamsClone, $this->requestedDomainParams);
 			list($domainUrlBaseSection,) = $targetDomainRoute->Url(
-				$this->request, $domainParams, $this->requestedDomainParams, ''
+				$this->request, $domainParams, $this->requestedDomainParams, '', TRUE
 			);
 			if (mb_strpos($domainUrlBaseSection, '//') === FALSE)
 				$domainUrlBaseSection = $request->GetDomainUrl() . $domainUrlBaseSection;
@@ -67,11 +67,12 @@ trait Canonical
 			$defaultParamsClone = array_diff_key($defaultParams, $this->requestedDomainParams);
 			$requestedParamsClone = array_diff_key($this->requestedParams, $this->requestedDomainParams);
 			list($domainUrlBaseSection,) = $targetDomainRoute->Url(
-				$this->request, $domainParams, $defaultParams, ''
+				$this->request, $domainParams, $defaultParams, '', TRUE
 			);
 			list($selfUrlDomainAndBasePart, $selfUrlPathAndQueryPart) = $this->currentRoute->Url(
-				$request, $requestedParamsClone, $defaultParamsClone, $this->getQueryStringParamsSepatator()
+				$request, $requestedParamsClone, $defaultParamsClone, $this->getQueryStringParamsSepatator(), TRUE
 			);
+
 			if (mb_strpos($domainUrlBaseSection, '//') === FALSE)
 				$domainUrlBaseSection = $request->GetDomainUrl() . $domainUrlBaseSection;
 			if (mb_strlen($domainUrlBaseSection) > 0 && $domainUrlBaseSection !== $request->GetBaseUrl()) 
@@ -81,7 +82,7 @@ trait Canonical
 		} else {
 			$domainUrlBaseSection = NULL;
 			list($selfUrlDomainAndBasePart, $selfUrlPathAndQueryPart) =  $this->currentRoute->Url(
-				$req, $this->requestedParams, $defaultParams, $this->getQueryStringParamsSepatator()
+				$request, $this->requestedParams, $defaultParams, $this->getQueryStringParamsSepatator(), TRUE
 			);
 			if (mb_strpos($selfUrlDomainAndBasePart, '//') === FALSE)
 				$selfUrlDomainAndBasePart = $request->GetDomainUrl() . $selfUrlDomainAndBasePart;
