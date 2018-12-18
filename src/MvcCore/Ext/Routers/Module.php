@@ -25,6 +25,13 @@ extends		\MvcCore\Router
 implements	\MvcCore\Ext\Routers\IModule,
 			\MvcCore\Ext\Routers\IExtended
 {
+	/**
+	 * MvcCore Extension - Router Media - version:
+	 * Comparison by PHP function version_compare();
+	 * @see http://php.net/manual/en/function.version-compare.php
+	 */
+	const VERSION = '5.0.0-alpha';
+
 	use \MvcCore\Ext\Routers\Extendeds\PropsGettersSetters;
 	use \MvcCore\Ext\Routers\Extendeds\Preparing;
 	use \MvcCore\Ext\Routers\Extendeds\RedirectHelpers;
@@ -42,12 +49,5 @@ implements	\MvcCore\Ext\Routers\IModule,
 	use \MvcCore\Ext\Routers\Module\UrlByQuery;
 	use \MvcCore\Ext\Routers\Module\UrlByRouteSections;
 	use \MvcCore\Ext\Routers\Module\UrlDomain;
-
-	/**
-	 * MvcCore Extension - Router Media - version:
-	 * Comparison by PHP function version_compare();
-	 * @see http://php.net/manual/en/function.version-compare.php
-	 */
-	const VERSION = '5.0.0-alpha';
 }
 
