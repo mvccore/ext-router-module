@@ -16,16 +16,23 @@ namespace MvcCore\Ext\Routers\Module;
 trait Props
 {
 	/**
-	 * @var \MvcCore\Ext\Routers\Modules\Route[]
+	 * Module domain routes store. Keys are string with every route `module`
+	 * property value (opposite value for classic route `name` property) and
+	 * values are module domain route instances.
+	 * @var \MvcCore\Ext\Routers\Modules\Route[]|array
 	 */
 	protected $domainRoutes = [];
 
 	/**
+	 * Currently matched module domain route instance 
+	 * or `NULL` if no module route is matched. 
 	 * @var \MvcCore\Ext\Routers\Modules\Route|NULL
 	 */
 	protected $currentDomainRoute = NULL;
 
 	/**
+	 * Currently matched module name by currently matched module domain route.
+	 * If no module domain route is matched, this value is `NULL`.
 	 * @var string|NULL
 	 */
 	protected $currentModule = NULL;

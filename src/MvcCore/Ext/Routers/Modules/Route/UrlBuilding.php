@@ -15,6 +15,53 @@ namespace MvcCore\Ext\Routers\Modules\Route;
 
 trait UrlBuilding
 {
+	/**
+	 * Complete route URL by given params array and route internal reverse 
+	 * replacements pattern string. If there are more given params in first 
+	 * argument than total count of replacement places in reverse pattern,
+	 * then create URL with query string params after reverse pattern, 
+	 * containing that extra record(s) value(s). Returned is an array with two 
+	 * strings - result URL in two parts - first part as scheme, domain and base 
+	 * path and second as path and query string.
+	 * Example:
+	 *	Input (`$params`):
+	 *		`[
+	 *			"name"		=> "cool-product-name",
+	 *			"color"		=> "blue",
+	 *			"variants"	=> ["L", "XL"],
+	 *		];`
+	 *	Input (`\MvcCore\Route::$reverse`):
+	 *		`"/products-list/<name>/<color*>"`
+	 *	Output:
+	 *		`[
+	 *			"https://example.com/any/app/base/path", 
+	 *			"/products-list/cool-product-name/blue?variant[]=L&amp;variant[]=XL"
+	 *		]`
+	 * @param \MvcCore\Request	$request 
+	 *							Currently requested request object.
+	 * @param array				$params
+	 *							URL params from application point completed 
+	 *							by developer.
+	 * @param array				$defaultUrlParams 
+	 *							Requested URL route params and query string 
+	 *							params without escaped HTML special chars: 
+	 *							`< > & " ' &`.
+	 * @param string			$queryStringParamsSepatator 
+	 *							Query params separator, `&` by default. Always 
+	 *							automatically completed by router instance.
+	 * @param bool				$splitUrl
+	 *							Boolean value about to split completed result URL
+	 *							into two parts or not. Default is FALSE to return 
+	 *							a string array with only one record - the result 
+	 *							URL. If `TRUE`, result url is split into two 
+	 *							parts and function return array with two items.
+	 * @return \string[]		Result URL address in array. If last argument is 
+	 *							`FALSE` by default, this function returns only 
+	 *							single item array with result URL. If last 
+	 *							argument is `TRUE`, function returns result URL 
+	 *							in two parts - domain part with base path and 
+	 *							path part with query string.
+	 */
 	public function Url (\MvcCore\IRequest & $request, array & $params = [], array & $defaultUrlParams = [], $queryStringParamsSepatator = '&', $splitUrl = FALSE) {
 		// check reverse initialization
 		if ($this->reverseParams === NULL) $this->initReverse();

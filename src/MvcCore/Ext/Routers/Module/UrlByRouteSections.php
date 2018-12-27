@@ -15,6 +15,36 @@ namespace MvcCore\Ext\Routers\Module;
 
 trait UrlByRouteSections
 {
+	/**
+	 * Complete semi-finished result URL as two section strings and system 
+	 * params array. First section as base section with scheme, domain and base 
+	 * path, second section as application requested path and query string and 
+	 * third section as system params like `media_version` and/or `localization`.
+	 * Those params could be inserted between first two sections as system 
+	 * params in result URL by media and localization router behaviour and 
+	 * default values.
+	 * Example:
+	 *	Input (`\MvcCore\Route::$reverse`):
+	 *		`"/products-list/<name>/<color>"`
+	 *	Input ($params):
+	 *		`array(
+	 *			"name"			=> "cool-product-name",
+	 *			"color"			=> "red",
+	 *			"variant"		=> ["L", "XL"],
+	 *			"media_version"	=> "mobile",
+	 *			"localization"	=> "en-US",
+	 *		);`
+	 *	Output:
+	 *		`[
+	 *			"/application/base/bath", 
+	 *			"/products-list/cool-product-name/blue?variant[]=L&amp;variant[]=XL", 
+	 *			["media_version" => "m", "localization" => "en-US"]
+	 *		]`
+	 * @param \MvcCore\Route|\MvcCore\IRoute &$route
+	 * @param array $params
+	 * @param string $urlParamRouteName
+	 * @return array `string $urlBaseSection, string $urlPathWithQuerySection, array $systemParams`
+	 */
 	protected function urlByRouteSections (\MvcCore\IRoute & $route, array & $params = [], $urlParamRouteName = NULL) {
 		/** @var $route \MvcCore\Route */
 		$defaultParams = array_merge([], $this->GetDefaultParams() ?: []);

@@ -15,6 +15,15 @@ namespace MvcCore\Ext\Routers\Module;
 
 trait UrlByQuery
 {
+	/**
+	 * Complete relative (or absolute) URL with all params in query string. If 
+	 * there is defined any target module in `$params`, absolute URL is returned.
+	 * Example: `"/application/base-bath/index.php?controller=ctrlName&amp;action=actionName&amp;name=cool-product-name&amp;color=blue"`
+	 * @param string $controllerActionOrRouteName
+	 * @param array  $params
+	 * @param string $givenRouteName
+	 * @return string
+	 */
 	public function UrlByQueryString ($controllerActionOrRouteName = 'Index:Index', array & $params = [], $givenRouteName = NULL) {
 		if ($givenRouteName == 'self') {
 			$params = array_merge($this->requestedParams ?: [], $params);
@@ -53,7 +62,6 @@ trait UrlByQuery
 			return $result;
 		} else {
 			return parent::UrlByQueryString($controllerActionOrRouteName, $params, $givenRouteName);
-		}
-		
+		}		
 	}
 }

@@ -15,7 +15,15 @@ namespace MvcCore\Ext\Routers\Module;
 
 trait DomainRouting
 {
-	
+	/**
+	 * Process routing by defined module domain routes. If any module domain 
+	 * route matches the request, complete current domain route property and 
+	 * current domain module property and set up requested domain params and
+	 * default domain params by matched domain route params.
+	 * @throws \LogicException Route configuration property is missing.
+	 * @throws \InvalidArgumentException Wrong route pattern format.
+	 * @return void
+	 */
 	protected function domainRouting () {
 		$request = & $this->request;
 		if ($this->routeGetRequestsOnly) {
@@ -41,6 +49,13 @@ trait DomainRouting
 		}
 	}
 
+	/**
+	 * If module domain route has been matched, complete requested domain params
+	 * and set up default params (before normal routing) with params from 
+	 * matched domain route.
+	 * @param array $allMatchedParams 
+	 * @return void
+	 */
 	protected function domainRoutingSetRequestedAndDefaultParams (array & $allMatchedParams) {
 		/** @var $currentRoute \MvcCore\Route */
 		$currentRoute = & $this->currentDomainRoute;
@@ -51,6 +66,11 @@ trait DomainRouting
 		$this->requestedDomainParams = array_merge([], $allMatchedParams);
 	}
 
+	/**
+	 * 
+	 * @param array $allMatchedParams 
+	 * @return bool
+	 */
 	protected function domainRoutingFilterParams (array & $allMatchedParams) {
 		$request = & $this->request;
 		$defaultParamsBefore = array_merge([], $this->defaultParams);

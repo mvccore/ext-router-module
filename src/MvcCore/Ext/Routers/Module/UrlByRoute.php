@@ -16,13 +16,8 @@ namespace MvcCore\Ext\Routers\Module;
 trait UrlByRoute
 {
 	/**
-	 * Complete non-absolute, non-localized URL by route instance reverse info.
-	 * If there is key `media_version` in `$params`, unset this param before
-	 * route URL completing and choose by this param URL prefix to prepend 
-	 * completed URL string.
-	 * If there is key `localization` in `$params`, unset this param before
-	 * route URL completing and place this param as URL prefix to prepend 
-	 * completed URL string and to prepend media site version prefix.
+	 * Complete relative (or absolute) URL by route instance reverse info. If 
+	 * there is defined any target module in `$params`, absolute URL is returned.
 	 * Example:
 	 *	Input (`\MvcCore\Route::$reverse`):
 	 *		`"/products-list/<name>/<color>"`
@@ -34,8 +29,10 @@ trait UrlByRoute
 	 *			"media_version"	=> "mobile",
 	 *			"localization"	=> "en-US",
 	 *		);`
-	 *	Output:
-	 *		`/application/base-bath/m/en-US/products-list/cool-product-name/blue?variant[]=L&amp;variant[]=XL"`
+	 *	Output (relative):
+	 *		`/application/base-bath/products-list/cool-product-name/blue?variant[]=L&amp;variant[]=XL"`
+	 *	Output (absolute):
+	 *		`https://domain.com/application/base-bath/products-list/cool-product-name/blue?variant[]=L&amp;variant[]=XL"`
 	 * @param \MvcCore\Route|\MvcCore\IRoute &$route
 	 * @param array $params
 	 * @param string $urlParamRouteName

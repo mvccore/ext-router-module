@@ -13,20 +13,28 @@
 
 namespace MvcCore\Ext\Routers\Modules;
 
+/**
+ * Responsibility - describing request(s) to match and reversely build URL addresses.
+ * - Describing request scheme, domain and base path part and target application 
+ *   module, optionally to define allowed localizations or allowed media versions.
+ * - Matching request by given request object, see `\MvcCore\Route::Matches()`.
+ * - Completing URL address scheme, domain and base path part by given params 
+ *   array, see `\MvcCore\Route::Url()`.
+ */
 interface IRoute
 {
     /**
-     * 
-     */
+	 * Route advanced configuration key to define allowed module names, where standard route could be used.
+	 */
     const CONFIG_ALLOWED_MODULES		= 'allowedModules';
 
     /**
-     * 
+     * Route advanced configuration key to define (only) allowed localizations for target application module.
      */
     const CONFIG_ALLOWED_LOCALIZATIONS	= 'allowedLocalizations';
 
     /**
-     * 
+     * Route advanced configuration key to define (only) allowed media (device) versions for target application module.
      */
     const CONFIG_ALLOWED_MEDIA_VERSIONS	= 'allowedMediaVersions';
 }

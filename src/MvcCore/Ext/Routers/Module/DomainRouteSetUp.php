@@ -15,6 +15,14 @@ namespace MvcCore\Ext\Routers\Module;
 
 trait DomainRouteSetUp
 {
+	/**
+	 * This method is executed after module domain routing is done and before 
+	 * standard routing. So there could be already routed/defined current module 
+	 * domain route and that route could contain additional configuration for 
+	 * normal routing. This method is the place where to put special values 
+	 * from module domain route into router before standard routing. 
+	 * @return void
+	 */
 	protected function domainRoutingSetUpRouterByDomainRoute () {
 	}
 }

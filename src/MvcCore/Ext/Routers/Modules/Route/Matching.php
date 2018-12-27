@@ -15,6 +15,16 @@ namespace MvcCore\Ext\Routers\Modules\Route;
 
 trait Matching
 {
+	/**
+	 * Return subject value used for `preg_match_all()` route match processing.
+	 * Complete subject by route flags. Route `pattern` (or `reverse`) must 
+	 * contain domain part or/and base path. Prepare those values from request 
+	 * object.
+	 * @param \MvcCore\IRequest $request 
+	 * @throws \InvalidArgumentException Domain route pattern or reverse  
+	 *									 must be defined as absolute.
+	 * @return string
+	 */
 	protected function matchesGetSubject (\MvcCore\IRequest & $request) {
 		$subject = $this->matchesGetSubjectHostAndBase($request) ;
 		if (!$this->flags[0]) {
@@ -27,6 +37,13 @@ trait Matching
 		return $subject;
 	}
 
+	/**
+	 * Parse rewrite params from `preg_match_all()` `$matches` result array into 
+	 * array, keyed by param name with parsed value.
+	 * @param array $matchedValues 
+	 * @param array $defaults 
+	 * @return array
+	 */
 	protected function & matchesParseRewriteParams (& $matchedValues, & $defaults) {
 		$matchedParams = [];
 		array_shift($matchedValues); // first item is always matched whole `$request->GetPath()` string.

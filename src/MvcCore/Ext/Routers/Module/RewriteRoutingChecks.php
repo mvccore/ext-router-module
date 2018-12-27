@@ -15,6 +15,15 @@ namespace MvcCore\Ext\Routers\Module;
 
 trait RewriteRoutingChecks
 {
+	/**
+	 * Return `TRUE` if there is possible by additional info array records 
+	 * to route request by given route as first argument. For example if route
+	 * object has defined http method and request has the same method or not 
+	 * or if route is allowed in currently routed module.
+	 * @param \MvcCore\IRoute $route 
+	 * @param array $additionalInfo 
+	 * @return bool
+	 */
 	protected function rewriteRoutingCheckRoute (\MvcCore\IRoute & $route, array $additionalInfo) {
 		list ($requestMethod) = $additionalInfo;
 

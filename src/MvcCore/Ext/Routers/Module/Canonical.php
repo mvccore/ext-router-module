@@ -15,6 +15,15 @@ namespace MvcCore\Ext\Routers\Module;
 
 trait Canonical
 {
+	/**
+	 * If request is routed by query string strategy, check if request controller
+	 * or request action is the same as default values. Then redirect to shorter
+	 * canonical URL. Check also if there is routed/defined any module domain 
+	 * route and if there is any, try to complete base URL domain part and also
+	 * compare this part with requested URL part. If there is difference, 
+	 * redirect to shorter URL version.
+	 * @return bool
+	 */
 	protected function canonicalRedirectQueryStringStrategy () {
 		/** @var $request \MvcCore\Request */
 		$request = & $this->request;
@@ -56,6 +65,16 @@ trait Canonical
 		return TRUE;
 	}
 
+	/**
+	 * If request is routed by rewrite routes strategy, try to complete canonical
+	 * URL by current route. Then compare completed base URL part with requested 
+	 * base URL part or completed path and query part with requested path and query
+	 * part. Check also if there is routed/defined any module domain route and 
+	 * if there is any, try to complete base URL domain part and also compare 
+	 * this part with requested URL part. If first URL part or second URL part 
+	 * is different, redirect to canonical shorter URL.
+	 * @return bool
+	 */
 	protected function canonicalRedirectRewriteRoutesStrategy () {
 		/** @var $request \MvcCore\Request */
 		$request = & $this->request;
