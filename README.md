@@ -14,6 +14,7 @@ MvcCore Router extension to manage multiple websites in single project, defined 
 3. [How It Works](#user-content-3-how-it-works)  
     3.1. [How It Works - Routing](#user-content-31-how-it-works---routing)  
     3.2. [How It Works - Url Completing](#user-content-32-how-it-works---url-completing)  
+4. [Example](#user-content-3-example)
 
 ```
 ## 1. Installation
@@ -39,16 +40,48 @@ composer require mvccore/ext-router-module
 ### 2.2. Features - Url Generating
 - Router could generate URL addresses into different modules only by adding `module` record with target module name into `Url()` method second argument - `$params` array.
 - If there is no `module` record in second argument `$params`, there is not generated absolute part of URL, only if standard route requires it or if there is `absolute` record in second argument `$params` with `TRUE` value.
+- Canonical and `self` URL addresses are also solved by module domain routes.
 
 [go to top](#user-content-outline)
 
 ## 3. How It Works
 
 ### 3.1. How It Works - Routing
-
+- After router strategy is solved and before standard routes routing is processed, there is processed module domain routes routing.
+- After module domain routes are processed, current module domain route is initialized.
+- Then every processed standard route is checked if there is allowed module name or not, if route is not allowed, is skipped.
+- After routing, if there is matched any module domain route with namespace and target controller is not defined absolutely, module route namespace is added before target controller path.
+- There is not required but recommended to define module domain routes by method `$router->SetDomainRoutes(...);` in `Bootstrap.php`.
 
 [go to top](#user-content-outline)
     
 ### 3.2. How It Works - Url Completing
+- If there is defined `module` record name in second arguments `$params` array, there
+  is completed base url part (scheme, domain and base path) by module domain route. 
+- If standard route has defined absolute part or if standard route is defined as absolute and if there
+  is specified any different `module` record name in second argument `$params` array, error is generated,
+  because it's logic conflict.
+
+[go to top](#user-content-outline)
+
+## 4. Example
+Module domain routes definition in `Bootstrap.php`:
+```php
+// Patch router type:
+$app = & \MvcCore\Application::GetInstance();
+$app->SetRouterClass('\MvcCore\Ext\Routers\Module');
+
+// Define domain routes:
+$router->SetDomainRoutes([
+			'blog'	=> [
+				'pattern'	=> '//blog.example.com',
+				'namespace'	=> 'Blog',
+			],
+			'main'	=> '//www.example.com'
+		]);
+
+// Define standard routes:
+...
+```
 
 [go to top](#user-content-outline)
