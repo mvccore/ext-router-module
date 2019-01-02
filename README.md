@@ -25,7 +25,6 @@ MvcCore Router extension to manage multiple websites in single project, defined 
     4.8. [Usage - Route Records By Language And Locale](#user-content-48-usage---route-records-by-language-and-locale)  
     4.9. [Usage - Redirect To Default And Back In First Request](#user-content-49-usage---redirect-to-default-and-back-in-first-request)  
 
-```
 ## 1. Installation
 ```shell
 composer require mvccore/ext-router-module
