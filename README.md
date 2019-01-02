@@ -4,7 +4,8 @@
 [![License](https://img.shields.io/badge/Licence-BSD-brightgreen.svg?style=plastic)](https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md)
 ![PHP Version](https://img.shields.io/badge/PHP->=5.3-brightgreen.svg?style=plastic)
 
-MvcCore Router extension to manage multiple websites in single project, defined by domain routes, targeted by module property in URL completing.
+MvcCore Router extension to manage multiple websites in single project, defined by domain routes, targeted by module property in URL completing.  
+This router is the way, how to route your requests in domain level with params or variable sections, namespaces, default param values and more.
 
 ## Outline  
 1. [Installation](#user-content-1-installation)  
@@ -98,6 +99,7 @@ Module domain route is special kind of route how to define part of application, 
 
 ## 4.3. Usage - Creating Module Domain Route
 - Module domain route is special kind of route how to define part of application, not directly controller or action. 
+- Module domain route pattern could contain any params or variable sections as standard route, it could contain percentage dynamic replacements for domain URL part as standard route (like `%domain%` or `%tld%` ...), but id can not contain anything else then sheme definition (`http://`, `https://` or `//`), domain part (and base part if you need), nothing else. 
 - Module domain route is extended directly from standard `\MvcCore\Route` class. 
 - Domain routes also could be defined as single configuration arrays passed into module domain route constructor, 
   when you define module domain routes on router instance by methods `SetDomainRoutes()`, `AddDomainRoutes()` or `AddDomainRoute()`.
