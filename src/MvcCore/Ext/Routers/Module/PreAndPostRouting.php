@@ -73,7 +73,7 @@ trait PreAndPostRouting
 				// set up requested params from query string if there are any 
 				// (and path if there is path from previous fn)
 				$requestParams = array_merge([], $this->request->GetParams(FALSE));
-				unset($requestParams['controller'], $requestParams['action']);
+				unset($requestParams[static::URL_PARAM_CONTROLLER], $requestParams[static::URL_PARAM_ACTION]);
 				$this->requestedParams = & $requestParams;
 			}
 		} else if ($domainRouteNamespace !== NULL) {
