@@ -16,14 +16,7 @@ MvcCore Router extension to manage multiple websites in single project, defined 
     3.2. [How It Works - Url Completing](#user-content-32-how-it-works---url-completing)  
 4. [Usage](#user-content-4-usage)  
     4.1. [Usage - `Bootstrap` Initialization](#user-content-41-usage---bootstrap-initialization)  
-    4.2. [Usage - Default Localization](#user-content-42-usage---default-localization)  
-    4.3. [Usage - Allowed Localizations](#user-content-43-usage---allowed-localizations)  
-    4.4. [Usage - Routes Configuration](#user-content-44-usage---routes-configuration)  
-    4.5. [Usage - Allow Non-Localized Routes](#user-content-45-usage---allow-non-localized-routes)  
-    4.6. [Usage - Detect Localization Only By Language](#user-content-46-usage---detect-localization-only-by-language)  
-    4.7. [Usage - Localization Equivalents](#user-content-47-usage---localization-equivalents)  
-    4.8. [Usage - Route Records By Language And Locale](#user-content-48-usage---route-records-by-language-and-locale)  
-    4.9. [Usage - Redirect To Default And Back In First Request](#user-content-49-usage---redirect-to-default-and-back-in-first-request)  
+    4.2. [Usage - Default Localization](#user-content-42-usage---domain-routes-and-standard-routes-definition)  
 
 ## 1. Installation
 ```shell
