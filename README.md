@@ -5,6 +5,7 @@
 ![PHP Version](https://img.shields.io/badge/PHP->=5.3-brightgreen.svg?style=plastic)
 
 MvcCore Router extension to manage multiple websites in single project, defined by domain routes, targeted by module property in URL completing.  
+
 This router is the way, how to route your requests in domain level with params or variable sections, namespaces, default param values and more.
 
 ## Outline  
