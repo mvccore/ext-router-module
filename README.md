@@ -103,7 +103,9 @@ The definition of a custom part of the application is designed very freely so th
 
 ## 4.3. Usage - Creating Module Domain Route
 - Module domain route is special kind of route how to define part of application, not directly controller or action. 
-- Module domain route pattern could contain any params or variable sections as standard route, it could contain percentage dynamic replacements for domain URL part as standard route (like `%domain%` or `%tld%` ...), but id can not contain anything else then sheme definition (`http://`, `https://` or `//`), domain part (and base part if you need), nothing else. 
+- Module domain route pattern could contain any params or variable sections as standard route, it could contain percentage 
+  dynamic replacements for domain URL part as standard route (like `%domain%` or `%tld%` ...), but id can not contain 
+  anything else then scheme definition (`http://`, `https://` or `//`), domain part (and base part if you need), nothing else. 
 - Module domain route is extended directly from standard `\MvcCore\Route` class. 
 - Domain routes also could be defined as single configuration arrays passed into module domain route constructor, 
   when you define module domain routes on router instance by methods `SetDomainRoutes()`, `AddDomainRoutes()` or `AddDomainRoute()`.
@@ -120,7 +122,7 @@ new \MvcCore\Ext\Routers\Modules\Route(
     ]
 );
 
-// Or instance by single configuration arrray:
+// Or instance by single configuration array:
 new \MvcCore\Ext\Routers\Modules\Route([
     "pattern"              => "//blog.%sld%.%tld%",
     "module"               => "blog",
@@ -131,7 +133,7 @@ new \MvcCore\Ext\Routers\Modules\Route([
     "allowedMediaVersions" => ["full" => ""]
 ]);
 
-// Or instance by single configuration arrray with directly defined 
+// Or instance by single configuration array with directly defined 
 // regular expression `match` pattern and `reverse` pattern`:
 new \MvcCore\Ext\Routers\Modules\Route([
     "match"                => "#^//blog\.%sld%\.%tld%$#",
@@ -221,7 +223,7 @@ $router->SetRoutes([
     'Index:Index'          => [
         'pattern'          => '/pages/<path>',
         'constraints'      => ['path' => '[-a-zA-Z0-9_/]+'],
-        //'allowedModules' => [NULL], //if there is aloowed `NULL`, all modules are allowed
+        //'allowedModules' => [NULL], //if there is allowed `NULL`, all modules are allowed
     ],    
 ]);
 ```
