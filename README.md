@@ -97,46 +97,45 @@ Module domain route is special kind of route how to define part of application, 
   controller processing and rendering for anything else how to generate application result.
 
 ## 4.3. Usage - Creating Module Domain Route
-Module domain route is special kind of route how to define part of application, not directly controller or action.  
-To define blog application sub-part in your existing application, you can define module domain route by many ways. 
-Module domain route is extended directly from standard `\MvcCore\Route` class.  
-Domain routes also could be defined as single configuration arrays passed into module domain route constructor, 
-when you define module domain routes on router instance by methods `SetDomainRoutes()`, `AddDomainRoutes()` or `AddDomainRoute()`.
-
+- Module domain route is special kind of route how to define part of application, not directly controller or action. 
+- Module domain route is extended directly from standard `\MvcCore\Route` class. 
+- Domain routes also could be defined as single configuration arrays passed into module domain route constructor, 
+  when you define module domain routes on router instance by methods `SetDomainRoutes()`, `AddDomainRoutes()` or `AddDomainRoute()`.
+  
 ```php
 // Instance by specified all constructor params:
 new \MvcCore\Ext\Routers\Modules\Route(
-	"//blog.%sld%.%tld%",				// pattern
-	"blog",			"Blog",				// module, namespace
-	["page" => 1],	["page" => "\d+"],	// defaults, constraints
-	[									// advanced configuration
-		"allowedLocalizations"	=> ["en-US"],
-		"allowedMediaVersions"	=> ["full" => ""]
-	]
+    "//blog.%sld%.%tld%",             // pattern
+    "blog",        "Blog",            // module, namespace
+    ["page" => 1], ["page" => "\d+"], // defaults, constraints
+    [                                 // advanced configuration
+        "allowedLocalizations" => ["en-US"],
+        "allowedMediaVersions" => ["full" => ""]
+    ]
 );
 
 // Or instance by single configuration arrray:
 new \MvcCore\Ext\Routers\Modules\Route([
-	"pattern"				=> "//blog.%sld%.%tld%",
-	"module"				=> "blog",
-	"namespace"				=> "Blog",
-	"defaults"				=> ["page" => 1],
-	"constraints"			=> ["page" => "\d+"],
-	"allowedLocalizations"	=> ["en-US"],
-	"allowedMediaVersions"	=> ["full" => ""]
+    "pattern"              => "//blog.%sld%.%tld%",
+    "module"               => "blog",
+    "namespace"            => "Blog",
+    "defaults"             => ["page" => 1],
+    "constraints"          => ["page" => "\d+"],
+    "allowedLocalizations" => ["en-US"],
+    "allowedMediaVersions" => ["full" => ""]
 ]);
 
 // Or instance by single configuration arrray with directly defined 
 // regular expression `match` pattern and `reverse` pattern`:
 new \MvcCore\Ext\Routers\Modules\Route([
-	"match"					=> "#^//blog\.%sld%\.%tld%$#",
-	"reverse"				=> "//blog.%sld%.%tld%",
-	"module"				=> "blog",
-	"namespace"				=> "Blog",
-	"defaults"				=> ["page" => 1],
-	"constraints"			=> ["page" => "\d+"],
-	"allowedLocalizations"	=> ["en-US"],
-	"allowedMediaVersions"	=> ["full" => ""]
+    "match"                => "#^//blog\.%sld%\.%tld%$#",
+    "reverse"              => "//blog.%sld%.%tld%",
+    "module"               => "blog",
+    "namespace"            => "Blog",
+    "defaults"             => ["page" => 1],
+    "constraints"          => ["page" => "\d+"],
+    "allowedLocalizations" => ["en-US"],
+    "allowedMediaVersions" => ["full" => ""]
 ]);
 ```
 
