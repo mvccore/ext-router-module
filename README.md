@@ -26,6 +26,8 @@ This router is the way, how to route your requests in domain level with params o
 composer require mvccore/ext-router-module
 ```
 
+[go to top](#user-content-outline)
+
 ## 2. Features
 
 ### 2.1. Features - Routing
