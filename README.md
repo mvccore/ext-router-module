@@ -120,8 +120,8 @@ new \MvcCore\Ext\Routers\Modules\Route(
     "blog",        "Blog",            // module, namespace
     ["page" => 1], ["page" => "\d+"], // defaults, constraints
     [                                 // advanced configuration
-        "allowedLocalizations" => ["en-US"],
-        "allowedMediaVersions" => ["full" => ""]
+        "allowedLocalizations" => ["en-US"],     // only for extension `mvccore/ext-router-localization`
+        "allowedMediaVersions" => ["full" => ""] // only for extension `mvccore/ext-router-media`
     ]
 );
 
@@ -132,8 +132,8 @@ new \MvcCore\Ext\Routers\Modules\Route([
     "namespace"            => "Blog",
     "defaults"             => ["page" => 1],
     "constraints"          => ["page" => "\d+"],
-    "allowedLocalizations" => ["en-US"],
-    "allowedMediaVersions" => ["full" => ""]
+    "allowedLocalizations" => ["en-US"],     // only for extension `mvccore/ext-router-localization`
+    "allowedMediaVersions" => ["full" => ""] // only for extension `mvccore/ext-router-media`
 ]);
 
 // Or instance by single configuration array with directly defined 
@@ -145,8 +145,8 @@ new \MvcCore\Ext\Routers\Modules\Route([
     "namespace"            => "Blog",
     "defaults"             => ["page" => 1],
     "constraints"          => ["page" => "\d+"],
-    "allowedLocalizations" => ["en-US"],
-    "allowedMediaVersions" => ["full" => ""]
+    "allowedLocalizations" => ["en-US"],     // only for extension `mvccore/ext-router-localization`
+    "allowedMediaVersions" => ["full" => ""] // only for extension `mvccore/ext-router-media`
 ]);
 ```
 
