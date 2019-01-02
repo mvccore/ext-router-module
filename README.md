@@ -14,7 +14,16 @@ MvcCore Router extension to manage multiple websites in single project, defined 
 3. [How It Works](#user-content-3-how-it-works)  
     3.1. [How It Works - Routing](#user-content-31-how-it-works---routing)  
     3.2. [How It Works - Url Completing](#user-content-32-how-it-works---url-completing)  
-4. [Example](#user-content-3-example)
+4. [Usage](#user-content-4-usage)  
+    4.1. [Usage - `Bootstrap` Initialization](#user-content-41-usage---bootstrap-initialization)  
+    4.2. [Usage - Default Localization](#user-content-42-usage---default-localization)  
+    4.3. [Usage - Allowed Localizations](#user-content-43-usage---allowed-localizations)  
+    4.4. [Usage - Routes Configuration](#user-content-44-usage---routes-configuration)  
+    4.5. [Usage - Allow Non-Localized Routes](#user-content-45-usage---allow-non-localized-routes)  
+    4.6. [Usage - Detect Localization Only By Language](#user-content-46-usage---detect-localization-only-by-language)  
+    4.7. [Usage - Localization Equivalents](#user-content-47-usage---localization-equivalents)  
+    4.8. [Usage - Route Records By Language And Locale](#user-content-48-usage---route-records-by-language-and-locale)  
+    4.9. [Usage - Redirect To Default And Back In First Request](#user-content-49-usage---redirect-to-default-and-back-in-first-request)  
 
 ```
 ## 1. Installation
@@ -64,24 +73,79 @@ composer require mvccore/ext-router-module
 
 [go to top](#user-content-outline)
 
-## 4. Example
-Module domain routes definition in `Bootstrap.php`:
+## 4. Usage
+
+## 4.1. Usage - `Bootstrap` Initialization
+Add this to `Bootstrap.php` or to **very application beginning**, 
+before application routing or any other extension configuration
+using router for any purposes:
 ```php
-// Patch router type:
 $app = & \MvcCore\Application::GetInstance();
 $app->SetRouterClass('\MvcCore\Ext\Routers\Module');
+...
+// to get router instance for next configuration:
+/** @var $router \MvcCore\Ext\Routers\Module */
+$router = & \MvcCore\Router::GetInstance();
+```
 
+[go to top](#user-content-outline)
+
+## 4.2. Usage - Domain Routes And Standard Routes Definition
+To work with modules, you need to specify more. With standard routes, you need to specify "module domain routes":
+```php
 // Define domain routes:
 $router->SetDomainRoutes([
-			'blog'	=> [
-				'pattern'	=> '//blog.example.com',
-				'namespace'	=> 'Blog',
-			],
-			'main'	=> '//www.example.com'
-		]);
+	// to define blog website module:
+	'blog'	=> [
+		'pattern'	=> '//blog.example.com',
+		'namespace'	=> 'Blog',
+	],
+	// to define main website module:
+	'main'	=> [
+		'pattern'	=> '//www.example.com',
+		'namespace'	=> 'Main',
+]);
 
-// Define standard routes:
-...
+// Now let's define standard routes:
+$router->SetRoutes([
+	// absolutely defined target controller:
+    '\Admin\Index:Index'    => '/admin',
+	// relatively defined controllers:
+    'Product:List'   => [
+        'pattern'          => [
+            'en'           => '/products-list[/<page>]',
+            'de'           => '/produkte-liste[/<page>]',
+        ],
+        'defaults'         => ['page' => 1],
+        'constraints'      => ['page' => '\d+'],
+    ],
+    'Product:Detail' => [
+        'match'            => [
+            'en'           => '#^/product/(?<id>\d+)(/(?<color>[a-z]+))?/?#',
+            'de'           => '#^/produkt/(?<id>\d+)(/(?<color>[a-z]+))?/?#'
+        ],
+        'reverse'          => [
+            'en'           => '/product/<id>[/<color>]',
+            'de'           => '/produkt/<id>[/<color>]'
+        ],
+        'defaults'         => [
+            'en'           => ['color' => 'red'],
+            'de'           => ['color' => 'rot'],
+        ]
+    ],
+    'Posts:List'    => [
+        'pattern'          => '/[<page>]',
+		'defaults'			=> ['page' => 1],
+        'constraints'      => ['page'         => '\d+']
+    ],
+    'Index:Index'    => [
+        'pattern'          => '/<path>',
+        'constraints'      => [
+            'path'         => '[-a-zA-Z0-9_/]*'
+        ]
+    ],    
+]);
+```
 ```
 
 [go to top](#user-content-outline)
