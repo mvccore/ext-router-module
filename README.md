@@ -101,10 +101,14 @@ $router->SetDomainRoutes([
     ],
     // to define main website module:
     'main'    => [
-        'pattern'      => '//<productsCategory>.example.com',
+        'pattern'      => '//[<productsCategory>.]example.com',
         'constraints' => ['productsCategory' => '-a-z0-9]+'],
         'namespace'      => 'Main',
     ],
+	// now all requests into `main` module will have `productsCategory` param
+	// in request object. For request into `http://example.com/`, there will
+	// be `NULL` value for this param, so you can recognize a homepage or there
+	// are many other ways how to target a homepage.
 ]);
 
 // Now let's define standard routes:
