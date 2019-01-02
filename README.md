@@ -16,7 +16,8 @@ MvcCore Router extension to manage multiple websites in single project, defined 
     3.2. [How It Works - Url Completing](#user-content-32-how-it-works---url-completing)  
 4. [Usage](#user-content-4-usage)  
     4.1. [Usage - `Bootstrap` Initialization](#user-content-41-usage---bootstrap-initialization)  
-    4.2. [Usage - Default Localization](#user-content-42-usage---domain-routes-and-standard-routes-definition)  
+    4.2. [Usage - Creating Module Domain Route](#user-content-42-usage---creating-module-domain-route)  
+    4.3. [Domain Routes And Standard Routes Definition](#user-content-43-usage---domain-routes-and-standard-routes-definition)  
 
 ## 1. Installation
 ```shell
@@ -82,10 +83,70 @@ $router = & \MvcCore\Router::GetInstance();
 
 [go to top](#user-content-outline)
 
+## 4.2. Usage - Targeting custom application part
+Module domain route is special kind of route how to define part of application, not directly controller or action. 
+- Your custom application part also could be defined as namespace in module domain route, which is used for routed controller by 
+  standard route(s), when the controller is not defined absolutely (by single backslash at the beginning or by double slashes 
+  in the beginning).
+- Your custom application part could be also defined by allowed modules definition, added into any standard route. By this way,
+  you could define which standard route could be used for which module. There could be more than one allowed module name or none 
+  (`NULL` means all modules are allowed).
+- Your custom part of application could be defined by special param name, called `module`. This param is added into request 
+  object every time when is any module domain route matched. It's value is completed in match by domain route module name.
+  This param serves only for describing purposes, how to generate URL from one module to another. But you could use it in 
+  controller processing and rendering for anything else how to generate application result.
+
+## 4.3. Usage - Creating Module Domain Route
+Module domain route is special kind of route how to define part of application, not directly controller or action.  
+To define blog application sub-part in your existing application, you can define module domain route by many ways. 
+Module domain route is extended directly from standard `\MvcCore\Route` class.  
+Domain routes also could be defined as single configuration arrays passed into module domain route constructor, 
+when you define module domain routes on router instance by methods `SetDomainRoutes()`, `AddDomainRoutes()` or `AddDomainRoute()`.
+
+```php
+// Instance by specified all constructor params:
+new \MvcCore\Ext\Routers\Modules\Route(
+	"//blog.%sld%.%tld%",				// pattern
+	"blog",			"Blog",				// module, namespace
+	["page" => 1],	["page" => "\d+"],	// defaults, constraints
+	[									// advanced configuration
+		"allowedLocalizations"	=> ["en-US"],
+		"allowedMediaVersions"	=> ["full" => ""]
+	]
+);
+
+// Or instance by single configuration arrray:
+new \MvcCore\Ext\Routers\Modules\Route([
+	"pattern"				=> "//blog.%sld%.%tld%",
+	"module"				=> "blog",
+	"namespace"				=> "Blog",
+	"defaults"				=> ["page" => 1],
+	"constraints"			=> ["page" => "\d+"],
+	"allowedLocalizations"	=> ["en-US"],
+	"allowedMediaVersions"	=> ["full" => ""]
+]);
+
+// Or instance by single configuration arrray with directly defined 
+// regular expression `match` pattern and `reverse` pattern`:
+new \MvcCore\Ext\Routers\Modules\Route([
+	"match"					=> "#^//blog\.%sld%\.%tld%$#",
+	"reverse"				=> "//blog.%sld%.%tld%",
+	"module"				=> "blog",
+	"namespace"				=> "Blog",
+	"defaults"				=> ["page" => 1],
+	"constraints"			=> ["page" => "\d+"],
+	"allowedLocalizations"	=> ["en-US"],
+	"allowedMediaVersions"	=> ["full" => ""]
+]);
+```
+
+[go to top](#user-content-outline)
+
 ## 4.2. Usage - Domain Routes And Standard Routes Definition
 To work with modules, you need to specify more. With standard routes, you need to specify "module domain routes":
 ```php
-// Define domain routes:
+// Define domain routes (domain routes also could be defined as single 
+// configuration arrays passed into module domain route constructor):
 $router->SetDomainRoutes([
     // to define blog website module:
     'blog'    => [
