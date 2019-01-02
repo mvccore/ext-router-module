@@ -94,71 +94,71 @@ To work with modules, you need to specify more. With standard routes, you need t
 ```php
 // Define domain routes:
 $router->SetDomainRoutes([
-	// to define blog website module:
-	'blog'	=> [
-		'pattern'	  => '//blog.example.com',
-		'namespace'	  => 'Blog',
-	],
-	// to define main website module:
-	'main'	=> [
-		'pattern'	  => '//<productsCategory>.example.com',
+    // to define blog website module:
+    'blog'    => [
+        'pattern'      => '//blog.example.com',
+        'namespace'      => 'Blog',
+    ],
+    // to define main website module:
+    'main'    => [
+        'pattern'      => '//<productsCategory>.example.com',
         'constraints' => ['productsCategory' => '-a-z0-9]+'],
-		'namespace'	  => 'Main',
-	],
+        'namespace'      => 'Main',
+    ],
 ]);
 
 // Now let's define standard routes:
 $router->SetRoutes([
     
-	// Absolutely defined target controller in `\App\Controllers`:
+    // Absolutely defined target controller in `\App\Controllers`:
     '\Admin\Index:Index'   => '/admin',
-	
+    
     // Relatively defined controllers in `\App\Controllers` by module route namespace:
-	
-	// There will be only used controllers `\Main\Categories` and
-	// `\Main\Categories`, because there is allowed only `main` module.
-	// Example match by: `http://phones.example.com/`, `http://phones.example.com/2`, ...
-	'Categories:List'      => [
+    
+    // There will be only used controllers `\Main\Categories` and
+    // `\Main\Categories`, because there is allowed only `main` module.
+    // Example match by: `http://phones.example.com/`, `http://phones.example.com/2`, ...
+    'Categories:List'      => [
         'pattern'          => '/[<page>]',
         'defaults'         => ['page' => 1],
         'constraints'      => ['page' => '\d+'],
-		'allowedModules'   => ['main'],
+        'allowedModules'   => ['main'],
     ],
-	// Example match by: `http://phones.example.com/products/brands-samsung/price-0-1000`, ...
+    // Example match by: `http://phones.example.com/products/brands-samsung/price-0-1000`, ...
     'Products:List'   => [
         'pattern'          => '/products[/<filter*>]',
         'constraints'      => ['filter' => '-a-zA-Z0-9_/]+'],
-		'allowedModules'   => ['main'],
+        'allowedModules'   => ['main'],
     ],
-	// Example match by: `http://phones.example.com/product/samsung-galaxy-note-9/white`, ...
+    // Example match by: `http://phones.example.com/product/samsung-galaxy-note-9/white`, ...
     'Products:Detail' => [
         'match'            => '#^/product/(?<id>\d+)(/(?<color>[a-z]+))?/?#',
         'reverse'          => '/product/<id>[/<color>]',
         'defaults'         => ['color' => 'red'],
-		'allowedModules'   => ['main'],
+        'allowedModules'   => ['main'],
     ],
-	// There will be only used controller `\Blog\Posts`, 
-	// because there is allowed only `blog` module.
-	// Example match by: `http://blog.example.com/`, `http://blog.example.com/2`, ...
+    // There will be only used controller `\Blog\Posts`, 
+    // because there is allowed only `blog` module.
+    // Example match by: `http://blog.example.com/`, `http://blog.example.com/2`, ...
     'Posts:List'           => [
         'pattern'          => '/<page>]',
         'defaults'         => ['page' => 1],
         'constraints'      => ['page' => '\d+'],
-		'allowedModules'   => ['blog'],
+        'allowedModules'   => ['blog'],
     ],
-	// Example match by: `http://blog.example.com/post/which-phone-to-buy`, ...
+    // Example match by: `http://blog.example.com/post/which-phone-to-buy`, ...
     'Posts:Detail'         => [
         'pattern'          => '/post/[<path>]',
         'constraints'      => ['path' => '[-a-zA-Z0-9_/]+']
-		'allowedModules'   => ['blog'],
+        'allowedModules'   => ['blog'],
     ],
-	// There will be used controller `\Main\Index` but 
-	// there could be also used controller `\Blog\Index`.
-	// Example match by: `http://example.com/pages/contacts`, `http://blog.example.com/pages/contacts`, ...
+    // There will be used controller `\Main\Index` but 
+    // there could be also used controller `\Blog\Index`.
+    // Example match by: `http://example.com/pages/contacts`, `http://blog.example.com/pages/contacts`, ...
     'Index:Index'          => [
         'pattern'          => '/pages/<path>',
         'constraints'      => ['path' => '[-a-zA-Z0-9_/]+'],
-		//'allowedModules'   => [NULL], //if there is aloowed `NULL`, all modules are allowed
+        //'allowedModules' => [NULL], //if there is aloowed `NULL`, all modules are allowed
     ],    
 ]);
 ```
