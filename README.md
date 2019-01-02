@@ -17,8 +17,9 @@ This router is the way, how to route your requests in domain level with params o
     3.2. [How It Works - Url Completing](#user-content-32-how-it-works---url-completing)  
 4. [Usage](#user-content-4-usage)  
     4.1. [Usage - `Bootstrap` Initialization](#user-content-41-usage---bootstrap-initialization)  
-    4.2. [Usage - Creating Module Domain Route](#user-content-42-usage---creating-module-domain-route)  
-    4.3. [Domain Routes And Standard Routes Definition](#user-content-43-usage---domain-routes-and-standard-routes-definition)  
+	4.2. [Usage - Targeting Custom Application Part](#user-content-42-usage---targeting-custom-application-part)  
+    4.3. [Usage - Creating Module Domain Route](#user-content-43-usage---creating-module-domain-route)  
+    4.4. [Domain Routes And Standard Routes Definition](#user-content-43-usage---domain-routes-and-standard-routes-definition)  
 
 ## 1. Installation
 ```shell
@@ -84,8 +85,9 @@ $router = & \MvcCore\Router::GetInstance();
 
 [go to top](#user-content-outline)
 
-## 4.2. Usage - Targeting custom application part
-Module domain route is special kind of route how to define part of application, not directly controller or action. 
+## 4.2. Usage - Targeting Custom Application Part
+Module domain route is special kind of route how to define part of application, not directly controller or action.  
+The definition of a custom part of the application is designed very freely so that you are able to do whatever you want.  
 - Your custom application part also could be defined as namespace in module domain route, which is used for routed controller by 
   standard route(s), when the controller is not defined absolutely (by single backslash at the beginning or by double slashes 
   in the beginning).
@@ -143,7 +145,7 @@ new \MvcCore\Ext\Routers\Modules\Route([
 
 [go to top](#user-content-outline)
 
-## 4.2. Usage - Domain Routes And Standard Routes Definition
+## 4.4. Usage - Domain Routes And Standard Routes Definition
 To work with modules, you need to specify more. With standard routes, you need to specify "module domain routes":
 ```php
 // Define domain routes (domain routes also could be defined as single 
