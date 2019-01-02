@@ -38,7 +38,7 @@ composer require mvccore/ext-router-module
 - There is processed domain routes routing before standard router routing. For routing strategy by rewrite routes and also for routing strategy by query string.
 - Each domain route has required `module` name and `pattern` property (or `match` with `reverse`) describing only scheme and domain URL part (or base path). 
   If route matches incoming request base part, there is assigned property `module` name into request params by matched domain route. Then there is processed standard routing by standard routes.
-- Each domain route could have defined `namespace` property for targeted controller by standard route or by query string, if that controller path is not defined absolutely. It means if it doesn't start with single backslash `\` or with double slash `//`.
+- Each domain route could have defined `namespace` property for targeted controller by standard route or by query string, if that controller path is not defined absolutely - if it doesn't start with single backslash `\` or with double slash `//`.
 - Every standard route could have defined advanced configuration property called `allowedModules` with array of strings describing for which module name is the route allowed. If route has not defined that advanced property, it means "route is allowed for all modules".
 - Any standard route still could have defined `pattern` (or `match` and `reverse`) absolutely. That route is then used in matching process only for it's fixed defined domain or scheme.
 
