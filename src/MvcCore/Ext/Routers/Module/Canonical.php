@@ -111,11 +111,11 @@ trait Canonical
 		}
 		
 		if (mb_strlen($selfUrlPathAndQueryPart) > 0) {
-			$path = $request->GetPath(TRUE);
+			$path = $request->GetPath(FALSE);
 			$requestedUrl = $path === '' ? '/' : $path ;
 			if (mb_strpos($selfUrlPathAndQueryPart, '?') !== FALSE) {
 				$selfUrlPathAndQueryPart = rawurldecode($selfUrlPathAndQueryPart);
-				$requestedUrl .= $request->GetQuery(TRUE, TRUE);
+				$requestedUrl .= $request->GetQuery(TRUE, FALSE);
 			}
 			//x([3, $selfUrlPathAndQueryPart, $requestedUrl]);
 			if ($selfUrlPathAndQueryPart !== $requestedUrl) 
