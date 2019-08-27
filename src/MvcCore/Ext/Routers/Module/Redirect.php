@@ -71,7 +71,11 @@ trait Redirect
 		
 		if ($fullOriginalUrl === $targetUrl) return TRUE;
 
-		$this->redirect($targetUrl, $this->redirectStatusCode);
+		$this->redirect(
+			$targetUrl, 
+			$this->redirectStatusCode, 
+			'Module router redirect'
+		);
 
 		return FALSE;
 	}
