@@ -68,7 +68,7 @@ interface IModule
 	 * @throws \InvalidArgumentException 
 	 * @return \MvcCore\Ext\Routers\IModule
 	 */
-	public function & SetDomainRoutes ($routes = [], $autoInitialize = TRUE);
+	public function SetDomainRoutes ($routes = [], $autoInitialize = TRUE);
 
 	/**
 	 * Append or prepend new module domain routes. If there is no module property 
@@ -118,7 +118,7 @@ interface IModule
 	 * @throws \InvalidArgumentException 
 	 * @return \MvcCore\Ext\Routers\IModule
 	 */
-	public function & AddDomainRoutes ($routes, $prepend = FALSE, $throwExceptionForDuplication = TRUE);
+	public function AddDomainRoutes ($routes, $prepend = FALSE, $throwExceptionForDuplication = TRUE);
 
 	/**
 	 * Append or prepend new module domain route.
@@ -164,5 +164,5 @@ interface IModule
 	 * @throws \InvalidArgumentException 
 	 * @return \MvcCore\Ext\Routers\IModule
 	 */
-	public function & AddDomainRoute ($routeCfgOrRoute, $prepend = FALSE, $throwExceptionForDuplication = TRUE);
+	public function AddDomainRoute ($routeCfgOrRoute, $prepend = FALSE, $throwExceptionForDuplication = TRUE);
 }

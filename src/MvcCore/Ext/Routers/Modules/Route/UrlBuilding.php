@@ -62,7 +62,7 @@ trait UrlBuilding
 	 *							in two parts - domain part with base path and 
 	 *							path part with query string.
 	 */
-	public function Url (\MvcCore\IRequest & $request, array & $params = [], array & $defaultUrlParams = [], $queryStringParamsSepatator = '&', $splitUrl = FALSE) {
+	public function Url (\MvcCore\IRequest $request, array & $params = [], array & $defaultUrlParams = [], $queryStringParamsSepatator = '&', $splitUrl = FALSE) {
 		// check reverse initialization
 		if ($this->reverseParams === NULL) $this->initReverse();
 		// complete and filter all params to build reverse pattern
@@ -81,7 +81,7 @@ trait UrlBuilding
 		// filter params
 		list(,$filteredParams) = $this->Filter($allParamsClone, $defaultUrlParams, \MvcCore\IRoute::CONFIG_FILTER_OUT);
 		// convert all domain param values to lower case
-		$router = & $this->router;
+		$router = $this->router;
 		foreach ($filteredParams as $paramName => & $paramValue) {
 			if ($paramName == $router::URL_PARAM_BASEPATH) continue;
 			if (is_string($paramValue)) $paramValue = mb_strtolower($paramValue);

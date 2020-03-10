@@ -38,7 +38,7 @@ trait UrlByRoute
 	 * @param string $urlParamRouteName
 	 * @return string
 	 */
-	public function UrlByRoute (\MvcCore\IRoute & $route, array & $params = [], $urlParamRouteName = NULL) {
+	public function UrlByRoute (\MvcCore\IRoute $route, array & $params = [], $urlParamRouteName = NULL) {
 		$moduleParamName = static::URL_PARAM_MODULE;
 		$moduleParamDefined = isset($params[$moduleParamName]);
 		$currentDomainRouteMatched = $this->currentDomainRoute !== NULL;
@@ -46,13 +46,11 @@ trait UrlByRoute
 		if (
 			$route->GetAbsolute() && $moduleParamDefined && $currentDomainRouteMatched &&
 			$params[$moduleParamName] !== $this->requestedDomainParams[$moduleParamName]
-		) {
-			$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+		) 
 			throw new \InvalidArgumentException(
-				"[".$selfClass."] It's not possible to create URL address "
+				"[".get_class()."] It's not possible to create URL address "
 				."to different module/domain for route defined as absolute."
 			);
-		}
 
 		list ($targetModule, $targetDomainRoute, $domainParamsDefault) = $this->urlGetDomainRouteAndDefaultDomainParams(
 			$params, $moduleParamDefined, $currentDomainRouteMatched

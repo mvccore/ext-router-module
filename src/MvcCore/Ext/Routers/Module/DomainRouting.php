@@ -25,17 +25,16 @@ trait DomainRouting
 	 * @return void
 	 */
 	protected function domainRouting () {
-		$request = & $this->request;
+		$request = $this->request;
 		if ($this->routeGetRequestsOnly) {
-			$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
-			trigger_error("[".$selfClass."] Routing only GET requests with special media "
+			trigger_error("[".get_class()."] Routing only GET requests with special media "
 			."site version or localization conditions is not allowed in module router.", 
 			E_USER_WARNING);
 			$this->routeGetRequestsOnly = FALSE;
 		}
 		/** @var $route \MvcCore\Ext\Routers\Modules\Route */
 		$allMatchedParams = [];
-		foreach ($this->domainRoutes as & $route) {
+		foreach ($this->domainRoutes as $route) {
 			$allMatchedParams = $route->Matches($request);
 			if ($allMatchedParams !== NULL) {
 				$this->currentDomainRoute = clone $route;
@@ -58,7 +57,7 @@ trait DomainRouting
 	 */
 	protected function domainRoutingSetRequestedAndDefaultParams (array & $allMatchedParams) {
 		/** @var $currentRoute \MvcCore\Route */
-		$currentRoute = & $this->currentDomainRoute;
+		$currentRoute = $this->currentDomainRoute;
 		$allMatchedParams[static::URL_PARAM_MODULE] = $currentRoute->GetModule();
 		$this->defaultParams = array_merge(
 			$currentRoute->GetDefaults(), $allMatchedParams
@@ -72,7 +71,7 @@ trait DomainRouting
 	 * @return bool
 	 */
 	protected function domainRoutingFilterParams (array & $allMatchedParams) {
-		$request = & $this->request;
+		$request = $this->request;
 		$defaultParamsBefore = array_merge([], $this->defaultParams);
 		$requestParams = array_merge([], $this->defaultParams);
 		// filter request params

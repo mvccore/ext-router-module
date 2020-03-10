@@ -26,7 +26,7 @@ trait Canonical
 	 */
 	protected function canonicalRedirectQueryStringStrategy () {
 		/** @var $request \MvcCore\Request */
-		$request = & $this->request;
+		$request = $this->request;
 		$redirectToCanonicalUrl = FALSE;
 		$requestGlobalGet = & $request->GetGlobalCollection('get');
 		$requestedCtrlDc = isset($requestGlobalGet[static::URL_PARAM_CONTROLLER]) ? $requestGlobalGet[static::URL_PARAM_CONTROLLER] : NULL;
@@ -77,7 +77,7 @@ trait Canonical
 	 */
 	protected function canonicalRedirectRewriteRoutesStrategy () {
 		/** @var $request \MvcCore\Request */
-		$request = & $this->request;
+		$request = $this->request;
 		$redirectToCanonicalUrl = FALSE;
 		$defaultParams =  $this->GetDefaultParams() ?: [];
 		if ($this->currentDomainRoute !== NULL) {

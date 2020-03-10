@@ -16,7 +16,7 @@ namespace MvcCore\Ext\Routers\Modules\Route;
 trait PropsGettersSetters
 {
 	/**
-	 * Required, application module name. Any custom string to define part of 
+	 * Required, application module name. Any custom string to define part of
 	 * application under specific domain, routed by this object.
 	 * @required
 	 * @var string|NULL
@@ -24,23 +24,23 @@ trait PropsGettersSetters
 	protected $module = NULL;
 
 	/**
-	 * Optional, target controller namespace - used if routed controller defined 
-	 * by standard route is not defined absolutely. This namespace is necessary 
-	 * to define relatively from standard application controller namespace to 
+	 * Optional, target controller namespace - used if routed controller defined
+	 * by standard route is not defined absolutely. This namespace is necessary
+	 * to define relatively from standard application controller namespace to
 	 * target controllers directory (namespace).
 	 * @var string|NULL
 	 */
 	protected $namespace = NULL;
 
 	/**
-	 * Optional, allowed localizations for the routed module if there is used 
+	 * Optional, allowed localizations for the routed module if there is used
 	 * any variant of module router with localization.
 	 * @var array
 	 */
 	protected $allowedLocalizations = NULL;
 
 	/**
-	 * Optional, allowed localizations for the routed module if there is used 
+	 * Optional, allowed localizations for the routed module if there is used
 	 * any variant of module router with media (device) definition.
 	 * @var array
 	 */
@@ -48,7 +48,7 @@ trait PropsGettersSetters
 
 
 	/**
-	 * Get application module name. Any custom string to define part of 
+	 * Get application module name. Any custom string to define part of
 	 * application under specific domain, routed by this object.
 	 * @return string|NULL
 	 */
@@ -57,21 +57,21 @@ trait PropsGettersSetters
 	}
 
 	/**
-	 * Set application module name. Any custom string to define part of 
+	 * Set application module name. Any custom string to define part of
 	 * application under specific domain, routed by this object.
-	 * @param string|NULL $module 
+	 * @param string|NULL $module
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetModule ($module) {
+	public function SetModule ($module) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		$this->module = $module;
 		return $this;
 	}
 
 	/**
-	 * Get target controller namespace - used if routed controller defined by 
-	 * standard route is not defined absolutely. This namespace is necessary to 
-	 * define relatively from standard application controller namespace to 
+	 * Get target controller namespace - used if routed controller defined by
+	 * standard route is not defined absolutely. This namespace is necessary to
+	 * define relatively from standard application controller namespace to
 	 * target controllers directory (namespace).
 	 * @return string|NULL
 	 */
@@ -80,21 +80,21 @@ trait PropsGettersSetters
 	}
 
 	/**
-	 * Set target controller namespace - used if routed controller defined by 
-	 * standard route is not defined absolutely. This namespace is necessary to 
-	 * define relatively from standard application controller namespace to 
+	 * Set target controller namespace - used if routed controller defined by
+	 * standard route is not defined absolutely. This namespace is necessary to
+	 * define relatively from standard application controller namespace to
 	 * target controllers directory (namespace).
-	 * @param string|NULL $namespace 
+	 * @param string|NULL $namespace
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetNamespace ($namespace) {
+	public function SetNamespace ($namespace) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		$this->namespace = $namespace;
 		return $this;
 	}
 
 	/**
-	 * Get allowed localizations for the routed module if there is used 
+	 * Get allowed localizations for the routed module if there is used
 	 * any variant of module router with localization.
 	 * @return \string[]
 	 */
@@ -105,38 +105,40 @@ trait PropsGettersSetters
 	}
 
 	/**
-	 * Set allowed localizations for the routed module if there is used 
+	 * Set allowed localizations for the routed module if there is used
 	 * any variant of module router with localization.
-	 * @var \string[] $allowedLocalizations..., International lower case language 
-	 *											code(s) (+ optionally dash character 
+	 * @var \string[] $allowedLocalizations..., International lower case language
+	 *											code(s) (+ optionally dash character
 	 *											+ upper case international locale code(s))
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetAllowedLocalizations (/* ...$allowedLocalizations */) {
+	public function SetAllowedLocalizations (/* ...$allowedLocalizations */) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		$allowedLocalizations = func_get_args();
-		if (count($allowedLocalizations) === 1 && is_array($allowedLocalizations[0])) 
+		if (count($allowedLocalizations) === 1 && is_array($allowedLocalizations[0]))
 			$allowedLocalizations = $allowedLocalizations[0];
 		$this->allowedLocalizations = array_combine($allowedLocalizations, $allowedLocalizations);
 		return $this;
 	}
 
 	/**
-	 * Get allowed localizations for the routed module if there is used 
+	 * Get allowed localizations for the routed module if there is used
 	 * any variant of module router with media (device) definition.
 	 * @return array
 	 */
 	public function & GetAllowedMediaVersions () {
-		return $this->allowedMediaVersions ?: [];
+		if (!$this->allowedMediaVersions) 
+			$this->allowedMediaVersions = [];
+		return $this->allowedMediaVersions;
 	}
 
 	/**
-	 * Set allowed localizations for the routed module if there is used 
+	 * Set allowed localizations for the routed module if there is used
 	 * any variant of module router with media (device) definition.
 	 * @param array $allowedMediaVersionsAndUrlValues
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetAllowedMediaVersions ($allowedMediaVersionsAndUrlValues = []) {
+	public function SetAllowedMediaVersions ($allowedMediaVersionsAndUrlValues = []) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		$this->allowedMediaVersions = $allowedMediaVersionsAndUrlValues;
 		return $this;
@@ -154,14 +156,14 @@ trait PropsGettersSetters
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
-	
+
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
 	 * Use method `SetModule($module)` instead.
-	 * @param string $name 
+	 * @param string $name
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetName ($name) {
+	public function SetName ($name) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
@@ -174,13 +176,13 @@ trait PropsGettersSetters
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
-	
+
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
-	 * @param string $controller 
+	 * @param string $controller
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetController ($controller) {
+	public function SetController ($controller) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
@@ -193,13 +195,13 @@ trait PropsGettersSetters
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
-	
+
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
-	 * @param string $action 
+	 * @param string $action
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetAction ($action) {
+	public function SetAction ($action) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
@@ -212,13 +214,13 @@ trait PropsGettersSetters
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
-	
+
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
-	 * @param string $controllerAction 
+	 * @param string $controllerAction
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetControllerAction ($controllerAction) {
+	public function SetControllerAction ($controllerAction) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
@@ -234,14 +236,14 @@ trait PropsGettersSetters
 
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
-	 * @param string $method 
+	 * @param string $method
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetMethod ($method = NULL) {
+	public function SetMethod ($method = NULL) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
-	
+
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
 	 * @return NULL
@@ -250,17 +252,17 @@ trait PropsGettersSetters
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
-	
+
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
-	 * @param string $redirectRouteName 
+	 * @param string $redirectRouteName
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetRedirect ($redirectRouteName = NULL) {
+	public function SetRedirect ($redirectRouteName = NULL) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
-	
+
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
 	 * @return bool
@@ -272,10 +274,10 @@ trait PropsGettersSetters
 
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
-	 * @param bool $absolute 
+	 * @param bool $absolute
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetAbsolute ($absolute = TRUE) {
+	public function SetAbsolute ($absolute = TRUE) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
@@ -291,24 +293,23 @@ trait PropsGettersSetters
 
 	/**
 	 * THIS METHOD IS NOT USED IN MODULE DOMAIN ROUTE CLASS.
-	 * @param string $groupName 
+	 * @param string $groupName
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	public function & SetGroupName ($groupName) {
+	public function SetGroupName ($groupName) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
 	/**
-	 * Trigger `E_USER_WARNING` user error about not used method in this 
+	 * Trigger `E_USER_WARNING` user error about not used method in this
 	 * extended module domain route.
-	 * @param string $method 
+	 * @param string $method
 	 * @return \MvcCore\Ext\Routers\Modules\IRoute
 	 */
 	protected function trriggerUnusedMethodError ($method) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\IRoute */
-		$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
-		trigger_error("[$selfClass] The method `$method` is not used in this extended class.", E_USER_WARNING);
+		trigger_error("[".get_class()."] The method `{$method}` is not used in this extended class.", E_USER_WARNING);
 		return $this;
 	}
 }

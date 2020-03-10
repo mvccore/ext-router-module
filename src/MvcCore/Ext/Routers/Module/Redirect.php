@@ -23,7 +23,7 @@ trait Redirect
 	 */
 	protected function redirectToVersion ($systemParams) {
 		/** @var $request \MvcCore\Request */
-		$request = & $this->request;
+		$request = $this->request;
 		
 		// get domain with base path URL section, 
 		// path with query string URL section 

@@ -56,7 +56,7 @@ trait PreAndPostRouting
 		if ($this->currentDomainRoute !== NULL) 
 			$domainRouteNamespace = $this->currentDomainRoute->GetNamespace();
 		if ($this->currentRoute === NULL) {
-			$request = & $this->request;
+			$request = $this->request;
 			$requestIsHome = (
 				trim($request->GetPath(), '/') == '' || 
 				$request->GetPath() == $request->GetScriptName()

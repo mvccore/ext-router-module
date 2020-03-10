@@ -63,7 +63,7 @@ trait RouteMethods
 	 * @throws \InvalidArgumentException 
 	 * @return \MvcCore\Ext\Routers\Module|\MvcCore\Ext\Routers\IModule
 	 */
-	public function & SetDomainRoutes ($routes = [], $autoInitialize = TRUE) {
+	public function SetDomainRoutes ($routes = [], $autoInitialize = TRUE) {
 		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($autoInitialize) {
 			$this->domainRoutes = [];
@@ -125,7 +125,7 @@ trait RouteMethods
 	 * @throws \InvalidArgumentException 
 	 * @return \MvcCore\Ext\Routers\Module|\MvcCore\Ext\Routers\IModule
 	 */
-	public function & AddDomainRoutes ($routes, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
+	public function AddDomainRoutes ($routes, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
 		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($prepend) $routes = array_reverse($routes);
 		$routeClass = static::$routeClass;
@@ -134,25 +134,21 @@ trait RouteMethods
 			if ($route instanceof \MvcCore\Ext\Routers\Modules\IRoute) {
 				if ($numericKey) {
 					$routeModule = $route->GetModule();
-					if ($routeModule === NULL) {
-						$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+					if ($routeModule === NULL) 
 						throw new \InvalidArgumentException(
-							"[".$selfClass."] Domain route cannot be configured without module "
+							"[".get_class()."] Domain route cannot be configured without module "
 							."record or without alphanumeric key in given routes collection."
 						);
-					}
 				}
 				$this->AddDomainRoute(
 					$route, $prepend, $throwExceptionForDuplication
 				);
 			} else {
-				if ($numericKey) {
-					$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+				if ($numericKey) 
 					throw new \InvalidArgumentException(
-						"[".$selfClass."] Domain route cannot be configured without "
+						"[".get_class()."] Domain route cannot be configured without "
 						."alphanumeric key (representing module) in given routes collection."
 					);
-				}
 				if (is_array($route)) {
 					if (!isset($route['module'])) $route['module'] = $key;
 					$this->AddDomainRoute(
@@ -169,10 +165,9 @@ trait RouteMethods
 						$prepend, $throwExceptionForDuplication
 					);
 				} else {
-					$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
 					throw new \InvalidArgumentException (
-						"[".$selfClass."] Route is not possible to assign "
-						."(key: \"$key\", value: " . serialize($route) . ")."
+						"[".get_class()."] Route is not possible to assign "
+						."(key: \"{$key}\", value: " . serialize($route) . ")."
 					);
 				}
 			}
@@ -224,17 +219,15 @@ trait RouteMethods
 	 * @throws \InvalidArgumentException 
 	 * @return \MvcCore\Ext\Routers\Module|\MvcCore\Ext\Routers\IModule
 	 */
-	public function & AddDomainRoute ($routeCfgOrRoute, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
+	public function AddDomainRoute ($routeCfgOrRoute, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
 		/** @var $this \MvcCore\Ext\Routers\Module */
-		$instance = & $this->getRouteDomainInstance($routeCfgOrRoute);
+		$instance = $this->getRouteDomainInstance($routeCfgOrRoute);
 		$routeModule = $instance->GetModule();
-		if (isset($this->domainRoutes[$routeModule]) && $throwExceptionForDuplication) {
-			$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+		if (isset($this->domainRoutes[$routeModule]) && $throwExceptionForDuplication) 
 			throw new \InvalidArgumentException(
-				"[".$selfClass."] Route with module name `.$routeModule.` "
+				"[".get_class()."] Route with module name `.$routeModule.` "
 				."has already been defined between router domain routes."
 			);
-		}
 		if ($prepend) {
 			$newItem = [$routeModule => $instance];
 			$this->domainRoutes = $newItem + $this->routes;
@@ -251,7 +244,7 @@ trait RouteMethods
 	 *		  Route instance or route config array.
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
-	protected function & getRouteDomainInstance (& $routeCfgOrRoute) {
+	protected function getRouteDomainInstance (& $routeCfgOrRoute) {
 		if ($routeCfgOrRoute instanceof \MvcCore\Ext\Routers\Modules\IRoute) 
 			return $routeCfgOrRoute->SetRouter($this);
 		$routeClass = self::$routeDomainClass;

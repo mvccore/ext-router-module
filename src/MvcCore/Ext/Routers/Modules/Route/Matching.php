@@ -25,15 +25,13 @@ trait Matching
 	 *									 must be defined as absolute.
 	 * @return string
 	 */
-	protected function matchesGetSubject (\MvcCore\IRequest & $request) {
+	protected function matchesGetSubject (\MvcCore\IRequest $request) {
 		$subject = $this->matchesGetSubjectHostAndBase($request) ;
-		if (!$this->flags[0]) {
-			$selfClass = version_compare(PHP_VERSION, '5.5', '>') ? self::class : __CLASS__;
+		if (!$this->flags[0]) 
 			throw new \InvalidArgumentException(
-				"[".$selfClass."] Domain route pattern or reverse must be defined as "
+				"[".get_class()."] Domain route pattern or reverse must be defined as "
 				."absolute with `//`, `http://` or `https://` at the beginning (`//www.domain.com`)."	
 			);
-		}
 		return $subject;
 	}
 
@@ -48,7 +46,8 @@ trait Matching
 		$matchedParams = [];
 		array_shift($matchedValues); // first item is always matched whole `$request->GetPath()` string.
 		foreach ($matchedValues as $key => $matchedValueArr) {
-			if (is_numeric($key)) continue;
+			if (is_numeric($key)) 
+				continue;
 			$matchedValue = (string) current($matchedValueArr);
 			if (!isset($defaults[$key])) 
 				$defaults[$key] = NULL;
@@ -56,7 +55,8 @@ trait Matching
 			if ($matchedEmptyString)
 				$matchedValue = $defaults[$key];
 			// continue if there is already valid ctrl and action from route ctrl or action configuration
-			if (isset($matchedParams[$key]) && $matchedEmptyString) continue;
+			if (isset($matchedParams[$key]) && $matchedEmptyString) 
+				continue;
 			$matchedParams[$key] = $matchedValue;
 		}
 		return $matchedParams;
