@@ -22,6 +22,7 @@ trait Redirect
 	 * @return bool
 	 */
 	protected function redirectToVersion ($systemParams) {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		/** @var $request \MvcCore\Request */
 		$request = $this->request;
 		

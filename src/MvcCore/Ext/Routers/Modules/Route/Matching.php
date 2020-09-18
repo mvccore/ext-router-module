@@ -26,6 +26,7 @@ trait Matching
 	 * @return string
 	 */
 	protected function matchesGetSubject (\MvcCore\IRequest $request) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$subject = $this->matchesGetSubjectHostAndBase($request) ;
 		if (!$this->flags[0]) 
 			throw new \InvalidArgumentException(
@@ -43,6 +44,7 @@ trait Matching
 	 * @return array
 	 */
 	protected function & matchesParseRewriteParams (& $matchedValues, & $defaults) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$matchedParams = [];
 		array_shift($matchedValues); // first item is always matched whole `$request->GetPath()` string.
 		foreach ($matchedValues as $key => $matchedValueArr) {

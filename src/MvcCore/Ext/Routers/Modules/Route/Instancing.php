@@ -84,6 +84,7 @@ trait Instancing
 		$constraints = [],
 		$advancedConfiguration = []
 	) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		if (count(func_get_args()) === 0) return;
 		// init pattern, match, reverse, module, namespace, defaults, constraints and filters
 		if (is_array($patternOrConfig)) {
@@ -109,6 +110,7 @@ trait Instancing
 	 * @return void
 	 */
 	protected function constructDataModuleNamespace (& $data) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		if (isset($data->module)) 
 			$this->SetModule($data->module);
 		if (isset($data->namespace)) 
@@ -125,6 +127,7 @@ trait Instancing
 	 * @return void
 	 */
 	protected function constructVarsModuleNamespace (& $module, & $namespace) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		if ($module !== NULL) 
 			$this->module = $module;
 		if ($namespace !== NULL) 

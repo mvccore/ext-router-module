@@ -25,7 +25,7 @@ trait DomainRouting
 	 * @return void
 	 */
 	protected function domainRouting () {
-		$request = $this->request;
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($this->routeGetRequestsOnly) {
 			trigger_error("[".get_class()."] Routing only GET requests with special media "
 			."site version or localization conditions is not allowed in module router.", 
@@ -35,7 +35,7 @@ trait DomainRouting
 		/** @var $route \MvcCore\Ext\Routers\Modules\Route */
 		$allMatchedParams = [];
 		foreach ($this->domainRoutes as $route) {
-			$allMatchedParams = $route->Matches($request);
+			$allMatchedParams = $route->Matches($this->request);
 			if ($allMatchedParams !== NULL) {
 				$this->currentDomainRoute = clone $route;
 				$this->currentModule = $this->currentDomainRoute->GetModule();
@@ -56,6 +56,7 @@ trait DomainRouting
 	 * @return void
 	 */
 	protected function domainRoutingSetRequestedAndDefaultParams (array & $allMatchedParams) {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		/** @var $currentRoute \MvcCore\Route */
 		$currentRoute = $this->currentDomainRoute;
 		$allMatchedParams[static::URL_PARAM_MODULE] = $currentRoute->GetModule();
@@ -71,6 +72,7 @@ trait DomainRouting
 	 * @return bool
 	 */
 	protected function domainRoutingFilterParams (array & $allMatchedParams) {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		$request = $this->request;
 		$defaultParamsBefore = array_merge([], $this->defaultParams);
 		$requestParams = array_merge([], $this->defaultParams);
@@ -85,8 +87,8 @@ trait DomainRouting
 			$this->currentDomainRoute = NULL;
 			return FALSE;
 		}
-		$requestParams = array_merge($this->request->GetParams(FALSE), $requestParamsFiltered);
-		$this->request->SetParams($requestParams);
+		$requestParams = array_merge($request->GetParams(FALSE), $requestParamsFiltered);
+		$request->SetParams($requestParams);
 		return TRUE;
 	}
 }

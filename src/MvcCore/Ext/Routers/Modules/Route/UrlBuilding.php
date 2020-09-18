@@ -63,6 +63,7 @@ trait UrlBuilding
 	 *							path part with query string.
 	 */
 	public function Url (\MvcCore\IRequest $request, array & $params = [], array & $defaultUrlParams = [], $queryStringParamsSepatator = '&', $splitUrl = FALSE) {
+		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		// check reverse initialization
 		if ($this->reverseParams === NULL) $this->initReverse();
 		// complete and filter all params to build reverse pattern

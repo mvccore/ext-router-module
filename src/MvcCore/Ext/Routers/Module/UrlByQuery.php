@@ -25,6 +25,7 @@ trait UrlByQuery
 	 * @return string
 	 */
 	public function UrlByQueryString ($controllerActionOrRouteName = 'Index:Index', array & $params = [], $givenRouteName = NULL) {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($givenRouteName == 'self') {
 			$params = array_merge($this->requestedParams ?: [], $params);
 			if ($controllerActionOrRouteName === static::DEFAULT_ROUTE_NAME && isset($params[static::URL_PARAM_PATH]))

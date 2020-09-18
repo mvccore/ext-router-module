@@ -24,5 +24,6 @@ trait DomainRouteSetUp
 	 * @return void
 	 */
 	protected function domainRoutingSetUpRouterByDomainRoute () {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 	}
 }

@@ -245,6 +245,7 @@ trait RouteMethods
 	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
 	 */
 	protected function getRouteDomainInstance (& $routeCfgOrRoute) {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($routeCfgOrRoute instanceof \MvcCore\Ext\Routers\Modules\IRoute) 
 			return $routeCfgOrRoute->SetRouter($this);
 		$routeClass = self::$routeDomainClass;

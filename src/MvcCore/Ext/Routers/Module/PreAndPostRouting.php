@@ -24,6 +24,7 @@ trait PreAndPostRouting
 	 * @return array
 	 */
 	protected function routeDetectStrategy () {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		list($requestCtrlName, $requestActionName) = parent::routeDetectStrategy();
 		if (!$this->internalRequest) $this->domainRouting();
 		return [$requestCtrlName, $requestActionName];

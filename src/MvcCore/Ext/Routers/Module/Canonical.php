@@ -25,6 +25,7 @@ trait Canonical
 	 * @return bool
 	 */
 	protected function canonicalRedirectQueryStringStrategy () {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		/** @var $request \MvcCore\Request */
 		$request = $this->request;
 		$redirectToCanonicalUrl = FALSE;
@@ -76,6 +77,7 @@ trait Canonical
 	 * @return bool
 	 */
 	protected function canonicalRedirectRewriteRoutesStrategy () {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		/** @var $request \MvcCore\Request */
 		$request = $this->request;
 		$redirectToCanonicalUrl = FALSE;

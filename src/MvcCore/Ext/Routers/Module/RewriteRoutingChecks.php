@@ -25,6 +25,7 @@ trait RewriteRoutingChecks
 	 * @return bool
 	 */
 	protected function rewriteRoutingCheckRoute (\MvcCore\IRoute $route, array $additionalInfo) {
+		/** @var $this \MvcCore\Ext\Routers\Module */
 		list ($requestMethod) = $additionalInfo;
 
 		$routeMethod = $route->GetMethod();
