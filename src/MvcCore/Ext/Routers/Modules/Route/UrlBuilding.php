@@ -69,7 +69,7 @@ trait UrlBuilding
 		if (count($this->reverseParams) === 0) {
 			$allParamsClone = array_merge([], $params);
 		} else {// complete params with necessary values to build reverse pattern (and than query string)
-			$emptyReverseParams = array_fill_keys(array_keys($this->reverseParams), '');
+			$emptyReverseParams = array_fill_keys(array_keys($this->reverseParams), NULL);
 			$allMergedParams = array_merge($this->defaults, $defaultUrlParams, $params);
 			// all params clone contains only keys necessary to build reverse 
 			// pattern for this route and all given `$params` keys, nothing more 
