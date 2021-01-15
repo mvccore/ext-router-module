@@ -7,14 +7,14 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Routers\Module;
 
-trait UrlByRoute
-{
+trait UrlByRoute {
+
 	/**
 	 * Complete relative (or absolute) URL by route instance reverse info. If 
 	 * there is defined any target module in `$params`, absolute URL is returned.
@@ -33,7 +33,7 @@ trait UrlByRoute
 	 *		`/application/base-bath/products-list/cool-product-name/blue?variant[]=L&amp;variant[]=XL"`
 	 *	Output (absolute):
 	 *		`https://domain.com/application/base-bath/products-list/cool-product-name/blue?variant[]=L&amp;variant[]=XL"`
-	 * @param \MvcCore\Route|\MvcCore\IRoute &$route
+	 * @param \MvcCore\Route &$route
 	 * @param array $params
 	 * @param string $urlParamRouteName
 	 * @return string

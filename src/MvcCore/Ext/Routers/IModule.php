@@ -7,18 +7,18 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Routers;
 
-interface IModule
-{
+interface IModule {
+
 	/**
 	 * URL param name to build absolute URL by desired module domain route .
 	 */
-    const URL_PARAM_MODULE = 'module';
+	const URL_PARAM_MODULE = 'module';
 
 	/**
 	 * Clear all possible previously configured module domain routes and set new 
@@ -63,10 +63,10 @@ interface IModule
 	 *			"allowedMediaVersions"	=> ["mobile" => "m", "full" => ""]
 	 *		])
 	 * ]);`
-	 * @param \MvcCore\Ext\Routers\Modules\IRoute[]|array|array[] $routes 
+	 * @param \MvcCore\Ext\Routers\Modules\Route[]|array|array[] $routes 
 	 * @param bool $autoInitialize 
 	 * @throws \InvalidArgumentException 
-	 * @return \MvcCore\Ext\Routers\IModule
+	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function SetDomainRoutes ($routes = [], $autoInitialize = TRUE);
 
@@ -112,11 +112,11 @@ interface IModule
 	 *			"allowedMediaVersions"	=> ["mobile" => "m", "full" => ""]
 	 *		])
 	 * ]);`
-	 * @param \MvcCore\Ext\Routers\Modules\IRoute[]|array|array[] $routes 
+	 * @param \MvcCore\Ext\Routers\Modules\Route[]|array|array[] $routes 
 	 * @param bool $prepend 
 	 * @param bool $throwExceptionForDuplication 
 	 * @throws \InvalidArgumentException 
-	 * @return \MvcCore\Ext\Routers\IModule
+	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function AddDomainRoutes ($routes, $prepend = FALSE, $throwExceptionForDuplication = TRUE);
 
@@ -158,11 +158,11 @@ interface IModule
 	 *			"allowedMediaVersions"	=> ["mobile" => "m", "full" => ""]
 	 *		])
 	 * ]);`
-	 * @param \MvcCore\Ext\Routers\Modules\IRoute|array $routeCfgOrRoute 
+	 * @param \MvcCore\Ext\Routers\Modules\Route|array $routeCfgOrRoute 
 	 * @param bool $prepend 
 	 * @param bool $throwExceptionForDuplication 
 	 * @throws \InvalidArgumentException 
-	 * @return \MvcCore\Ext\Routers\IModule
+	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function AddDomainRoute ($routeCfgOrRoute, $prepend = FALSE, $throwExceptionForDuplication = TRUE);
 }

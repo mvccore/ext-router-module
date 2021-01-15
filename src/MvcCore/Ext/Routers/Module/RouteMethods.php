@@ -7,14 +7,14 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Routers\Module;
 
-trait RouteMethods
-{
+trait RouteMethods {
+
 	/**
 	 * Clear all possible previously configured module domain routes and set new 
 	 * given routes again collection again. If there is no module property 
@@ -58,10 +58,10 @@ trait RouteMethods
 	 *			"allowedMediaVersions"	=> ["mobile" => "m", "full" => ""]
 	 *		])
 	 * ]);`
-	 * @param \MvcCore\Ext\Routers\Modules\Route[]|\MvcCore\Ext\Routers\Modules\IRoute[]|array|array[] $routes 
+	 * @param \MvcCore\Ext\Routers\Modules\Route[]|array|array[] $routes 
 	 * @param bool $autoInitialize 
 	 * @throws \InvalidArgumentException 
-	 * @return \MvcCore\Ext\Routers\Module|\MvcCore\Ext\Routers\IModule
+	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function SetDomainRoutes ($routes = [], $autoInitialize = TRUE) {
 		/** @var $this \MvcCore\Ext\Routers\Module */
@@ -119,11 +119,11 @@ trait RouteMethods
 	 *			"allowedMediaVersions"	=> ["mobile" => "m", "full" => ""]
 	 *		])
 	 * ]);`
-	 * @param \MvcCore\Ext\Routers\Modules\Route[]|\MvcCore\Ext\Routers\Modules\IRoute[]|array|array[] $routes 
+	 * @param \MvcCore\Ext\Routers\Modules\Route[]|array|array[] $routes 
 	 * @param bool $prepend 
 	 * @param bool $throwExceptionForDuplication 
 	 * @throws \InvalidArgumentException 
-	 * @return \MvcCore\Ext\Routers\Module|\MvcCore\Ext\Routers\IModule
+	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function AddDomainRoutes ($routes, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
 		/** @var $this \MvcCore\Ext\Routers\Module */
@@ -213,11 +213,11 @@ trait RouteMethods
 	 *			"allowedMediaVersions"	=> ["mobile" => "m", "full" => ""]
 	 *		])
 	 * ]);`
-	 * @param \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute|array $routeCfgOrRoute 
+	 * @param \MvcCore\Ext\Routers\Modules\Route|array $routeCfgOrRoute 
 	 * @param bool $prepend 
 	 * @param bool $throwExceptionForDuplication 
 	 * @throws \InvalidArgumentException 
-	 * @return \MvcCore\Ext\Routers\Module|\MvcCore\Ext\Routers\IModule
+	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function AddDomainRoute ($routeCfgOrRoute, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
 		/** @var $this \MvcCore\Ext\Routers\Module */
@@ -240,9 +240,9 @@ trait RouteMethods
 	/**
 	 * Get always route instance from given route configuration data or return
 	 * already created given instance.
-	 * @param \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute|array $routeCfgOrRoute 
+	 * @param \MvcCore\Ext\Routers\Modules\Route|array $routeCfgOrRoute 
 	 *		  Route instance or route config array.
-	 * @return \MvcCore\Ext\Routers\Modules\Route|\MvcCore\Ext\Routers\Modules\IRoute
+	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	protected function getRouteDomainInstance (& $routeCfgOrRoute) {
 		/** @var $this \MvcCore\Ext\Routers\Module */

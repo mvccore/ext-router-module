@@ -7,20 +7,20 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Routers\Modules\Route;
 
-trait Matching
-{
+trait Matching {
+
 	/**
 	 * Return subject value used for `preg_match_all()` route match processing.
 	 * Complete subject by route flags. Route `pattern` (or `reverse`) must 
 	 * contain domain part or/and base path. Prepare those values from request 
 	 * object.
-	 * @param \MvcCore\IRequest $request 
+	 * @param \MvcCore\Request $request 
 	 * @throws \InvalidArgumentException Domain route pattern or reverse  
 	 *									 must be defined as absolute.
 	 * @return string

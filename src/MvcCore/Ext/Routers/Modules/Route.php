@@ -7,8 +7,8 @@
  * For the full copyright and license information, please view
  * the LICENSE.md file that are distributed with this source code.
  *
- * @copyright	Copyright (c) 2016 Tom Flídr (https://github.com/mvccore/mvccore)
- * @license		https://mvccore.github.io/docs/mvccore/4.0.0/LICENCE.md
+ * @copyright	Copyright (c) 2016 Tom Flidr (https://github.com/mvccore)
+ * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
 namespace MvcCore\Ext\Routers\Modules;
@@ -23,15 +23,15 @@ namespace MvcCore\Ext\Routers\Modules;
  */
 class		Route
 extends		\MvcCore\Route
-implements	\MvcCore\Ext\Routers\Modules\IRoute
-{
+implements	\MvcCore\Ext\Routers\Modules\IRoute {
+
 	use \MvcCore\Ext\Routers\Modules\Route\PropsGettersSetters;
 	//use \MvcCore\Ext\Routers\Modules\Route\Instancing;
 	use \MvcCore\Ext\Routers\Modules\Route\Matching;
 	use \MvcCore\Ext\Routers\Modules\Route\UrlBuilding;
 
-    // PHP 5.4 workaround:
-    use \MvcCore\Ext\Routers\Modules\Route\Instancing {
+	// PHP 5.4 workaround:
+	use \MvcCore\Ext\Routers\Modules\Route\Instancing {
 		\MvcCore\Ext\Routers\Modules\Route\Instancing::__construct as protected __constructModules;
 	}
 	public function __construct() {
