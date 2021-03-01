@@ -87,8 +87,18 @@ trait DomainRouting {
 			$this->currentDomainRoute = NULL;
 			return FALSE;
 		}
-		$requestParams = array_merge($request->GetParams(FALSE), $requestParamsFiltered);
-		$request->SetParams($requestParams);
+		$requestParams = array_merge(
+			[], 
+			$request->GetParams(
+				FALSE, [], \MvcCore\IRequest::PARAM_TYPE_QUERY_STRING | \MvcCore\IRequest::PARAM_TYPE_URL_REWRITE
+			), 
+			$requestParamsFiltered
+		);
+		foreach ($requestParamsFiltered as $requestParamName => $requestParamValue) {
+			$sourceType = $request->GetParamSourceType($requestParamName);
+			if (!$sourceType) $sourceType = \MvcCore\IRequest::PARAM_TYPE_URL_REWRITE;
+			$request->SetParam($requestParamName, $requestParamValue, $sourceType);
+		}
 		return TRUE;
 	}
 }

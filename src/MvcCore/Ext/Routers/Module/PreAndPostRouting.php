@@ -73,7 +73,11 @@ trait PreAndPostRouting {
 				);
 				// set up requested params from query string if there are any 
 				// (and path if there is path from previous fn)
-				$requestParams = array_merge([], $this->request->GetParams(FALSE));
+				$requestParams = array_merge(
+					[], $this->request->GetParams(
+						FALSE, [], \MvcCore\IRequest::PARAM_TYPE_QUERY_STRING | \MvcCore\IRequest::PARAM_TYPE_URL_REWRITE
+					)
+				);
 				unset($requestParams[static::URL_PARAM_CONTROLLER], $requestParams[static::URL_PARAM_ACTION]);
 				$this->requestedParams = & $requestParams;
 			}
