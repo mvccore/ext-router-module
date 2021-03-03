@@ -43,7 +43,7 @@ trait Matching {
 	 * @param array $defaults 
 	 * @return array
 	 */
-	protected function & matchesParseRewriteParams (& $matchedValues, & $defaults) {
+	protected function matchesParseRewriteParams (& $matchedValues, & $defaults) {
 		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$matchedParams = [];
 		array_shift($matchedValues); // first item is always matched whole `$request->GetPath()` string.

@@ -129,7 +129,7 @@ trait PropsGettersSetters {
 	 * any variant of module router with media (device) definition.
 	 * @return array
 	 */
-	public function & GetAllowedMediaVersions () {
+	public function GetAllowedMediaVersions () {
 		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		if (!$this->allowedMediaVersions) 
 			$this->allowedMediaVersions = [];
