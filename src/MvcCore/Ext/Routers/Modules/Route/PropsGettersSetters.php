@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Modules\Route;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Modules\Route
+ */
 trait PropsGettersSetters {
 
 	/**
@@ -53,7 +56,6 @@ trait PropsGettersSetters {
 	 * @return string|NULL
 	 */
 	public function GetModule () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->module;
 	}
 
@@ -64,7 +66,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetModule ($module) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->module = $module;
 		return $this;
 	}
@@ -77,7 +78,6 @@ trait PropsGettersSetters {
 	 * @return string|NULL
 	 */
 	public function GetNamespace () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->namespace;
 	}
 
@@ -90,7 +90,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetNamespace ($namespace) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->namespace = $namespace;
 		return $this;
 	}
@@ -101,7 +100,6 @@ trait PropsGettersSetters {
 	 * @return \string[]
 	 */
 	public function GetAllowedLocalizations () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->allowedLocalizations
 			? array_keys($this->allowedLocalizations)
 			: [];
@@ -116,7 +114,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetAllowedLocalizations (/* ...$allowedLocalizations */) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$allowedLocalizations = func_get_args();
 		if (count($allowedLocalizations) === 1 && is_array($allowedLocalizations[0]))
 			$allowedLocalizations = $allowedLocalizations[0];
@@ -130,7 +127,6 @@ trait PropsGettersSetters {
 	 * @return array
 	 */
 	public function GetAllowedMediaVersions () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		if (!$this->allowedMediaVersions) 
 			$this->allowedMediaVersions = [];
 		return $this->allowedMediaVersions;
@@ -143,7 +139,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetAllowedMediaVersions ($allowedMediaVersionsAndUrlValues = []) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->allowedMediaVersions = $allowedMediaVersionsAndUrlValues;
 		return $this;
 	}
@@ -157,7 +152,6 @@ trait PropsGettersSetters {
 	 * @return NULL
 	 */
 	public function GetName () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
@@ -169,7 +163,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetName ($name) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
@@ -178,7 +171,6 @@ trait PropsGettersSetters {
 	 * @return NULL
 	 */
 	public function GetController () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
@@ -189,7 +181,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetController ($controller) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
@@ -198,7 +189,6 @@ trait PropsGettersSetters {
 	 * @return NULL
 	 */
 	public function GetAction () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
@@ -209,7 +199,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetAction ($action) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
@@ -218,7 +207,6 @@ trait PropsGettersSetters {
 	 * @return NULL
 	 */
 	public function GetControllerAction () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
@@ -229,7 +217,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetControllerAction ($controllerAction) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
@@ -238,7 +225,6 @@ trait PropsGettersSetters {
 	 * @return NULL
 	 */
 	public function GetMethod () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
@@ -249,7 +235,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetMethod ($method = NULL) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
@@ -258,7 +243,6 @@ trait PropsGettersSetters {
 	 * @return NULL
 	 */
 	public function GetRedirect () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
@@ -269,7 +253,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetRedirect ($redirectRouteName = NULL) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
@@ -278,7 +261,6 @@ trait PropsGettersSetters {
 	 * @return bool
 	 */
 	public function GetAbsolute () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return TRUE;
 	}
@@ -289,7 +271,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetAbsolute ($absolute = TRUE) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
@@ -298,7 +279,6 @@ trait PropsGettersSetters {
 	 * @return NULL
 	 */
 	public function GetGroupName () {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		$this->trriggerUnusedMethodError(__METHOD__);
 		return NULL;
 	}
@@ -309,7 +289,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	public function SetGroupName ($groupName) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		return $this->trriggerUnusedMethodError(__METHOD__);
 	}
 
@@ -320,7 +299,6 @@ trait PropsGettersSetters {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	protected function trriggerUnusedMethodError ($method) {
-		/** @var $this \MvcCore\Ext\Routers\Modules\Route */
 		trigger_error("[".get_class()."] The method `{$method}` is not used in this extended class.", E_USER_WARNING);
 		return $this;
 	}

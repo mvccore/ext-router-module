@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait Canonical {
 
 	/**
@@ -25,8 +28,7 @@ trait Canonical {
 	 * @return bool
 	 */
 	protected function canonicalRedirectQueryStringStrategy () {
-		/** @var $this \MvcCore\Ext\Routers\Module */
-		/** @var $request \MvcCore\Request */
+		/** @var \MvcCore\Request $request */
 		$request = $this->request;
 		$redirectToCanonicalUrl = FALSE;
 		$requestGlobalGet = & $request->GetGlobalCollection('get');
@@ -77,8 +79,7 @@ trait Canonical {
 	 * @return bool
 	 */
 	protected function canonicalRedirectRewriteRoutesStrategy () {
-		/** @var $this \MvcCore\Ext\Routers\Module */
-		/** @var $request \MvcCore\Request */
+		/** @var \MvcCore\Request $request */
 		$request = $this->request;
 		$redirectToCanonicalUrl = FALSE;
 		$defaultParams =  $this->GetDefaultParams() ?: [];

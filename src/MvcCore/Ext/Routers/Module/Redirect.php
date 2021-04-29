@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait Redirect {
 
 	/**
@@ -22,8 +25,7 @@ trait Redirect {
 	 * @return bool
 	 */
 	protected function redirectToVersion ($systemParams) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
-		/** @var $request \MvcCore\Request */
+		/** @var \MvcCore\Request $request */
 		$request = $this->request;
 		
 		// get domain with base path URL section, 

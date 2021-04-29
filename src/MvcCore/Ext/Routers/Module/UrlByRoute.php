@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait UrlByRoute {
 
 	/**
@@ -39,7 +42,6 @@ trait UrlByRoute {
 	 * @return string
 	 */
 	public function UrlByRoute (\MvcCore\IRoute $route, array & $params = [], $urlParamRouteName = NULL) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		$moduleParamName = static::URL_PARAM_MODULE;
 		$moduleParamDefined = isset($params[$moduleParamName]);
 		$currentDomainRouteMatched = $this->currentDomainRoute !== NULL;

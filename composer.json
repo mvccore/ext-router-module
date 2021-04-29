@@ -26,7 +26,7 @@
 	"require": {
 		"php": ">=5.4.0",
 		"mvccore/mvccore": "^5.0.11",
-		"mvccore/ext-router-extended": "^5.0"
+		"mvccore/ext-router-extended": "^5.0.1"
 	},
 	"autoload": {
 		"classmap": [

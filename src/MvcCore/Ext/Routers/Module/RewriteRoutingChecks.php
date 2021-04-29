@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait RewriteRoutingChecks {
 
 	/**
@@ -25,7 +28,6 @@ trait RewriteRoutingChecks {
 	 * @return bool
 	 */
 	protected function rewriteRoutingCheckRoute (\MvcCore\IRoute $route, array $additionalInfo) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		list ($requestMethod) = $additionalInfo;
 
 		$routeMethod = $route->GetMethod();

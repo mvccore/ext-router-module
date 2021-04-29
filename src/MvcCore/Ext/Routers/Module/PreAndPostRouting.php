@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait PreAndPostRouting {
 
 	/**
@@ -24,7 +27,6 @@ trait PreAndPostRouting {
 	 * @return array
 	 */
 	protected function routeDetectStrategy () {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		list($requestCtrlName, $requestActionName) = parent::routeDetectStrategy();
 		if (!$this->internalRequest) $this->domainRouting();
 		return [$requestCtrlName, $requestActionName];
@@ -52,7 +54,6 @@ trait PreAndPostRouting {
 	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	protected function routeSetUpDefaultForHomeIfNoMatch () {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		$domainRouteNamespace = NULL;
 		if ($this->currentDomainRoute !== NULL) 
 			$domainRouteNamespace = $this->currentDomainRoute->GetNamespace();

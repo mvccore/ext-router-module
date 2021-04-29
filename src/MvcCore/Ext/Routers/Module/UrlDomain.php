@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait UrlDomain {
 
 	/**
@@ -28,7 +31,6 @@ trait UrlDomain {
 	 * @return array `[string|NULL $targetModule, \MvcCore\Ext\Routers\Modules\Route|NULL $targetDomainRoute, array $domainParamsDefault]`
 	 */
 	protected function urlGetDomainRouteAndDefaultDomainParams (array & $params, $moduleParamDefined, $currentDomainRouteMatched) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		$targetModule = NULL;
 		$targetDomainRoute = NULL;
 		$domainParamsDefault = [];
@@ -66,7 +68,6 @@ trait UrlDomain {
 	 * @return string
 	 */
 	protected function urlGetDomainUrlAndClasifyParamsAndDomainParams (array & $params, array & $domainParamsDefault, & $targetDomainRoute) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		// remove domain module params and complete URL address base part by module domain
 		$domainParams = array_intersect_key($params, $domainParamsDefault);
 		$params = array_diff_key($params, $domainParamsDefault);

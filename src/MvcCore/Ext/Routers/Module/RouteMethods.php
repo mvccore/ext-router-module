@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait RouteMethods {
 
 	/**
@@ -64,7 +67,6 @@ trait RouteMethods {
 	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function SetDomainRoutes ($routes = [], $autoInitialize = TRUE) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($autoInitialize) {
 			$this->domainRoutes = [];
 			$this->AddDomainRoutes($routes);
@@ -126,7 +128,6 @@ trait RouteMethods {
 	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function AddDomainRoutes ($routes, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($prepend) $routes = array_reverse($routes);
 		$routeClass = static::$routeClass;
 		foreach ($routes as $key => $route) {
@@ -220,7 +221,6 @@ trait RouteMethods {
 	 * @return \MvcCore\Ext\Routers\Module
 	 */
 	public function AddDomainRoute ($routeCfgOrRoute, $prepend = FALSE, $throwExceptionForDuplication = TRUE) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		$instance = $this->getRouteDomainInstance($routeCfgOrRoute);
 		$routeModule = $instance->GetModule();
 		if (isset($this->domainRoutes[$routeModule]) && $throwExceptionForDuplication) 
@@ -245,7 +245,6 @@ trait RouteMethods {
 	 * @return \MvcCore\Ext\Routers\Modules\Route
 	 */
 	protected function getRouteDomainInstance (& $routeCfgOrRoute) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($routeCfgOrRoute instanceof \MvcCore\Ext\Routers\Modules\IRoute) 
 			return $routeCfgOrRoute->SetRouter($this);
 		$routeClass = self::$routeDomainClass;

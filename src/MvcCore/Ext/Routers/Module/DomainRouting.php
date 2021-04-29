@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait DomainRouting {
 
 	/**
@@ -25,14 +28,13 @@ trait DomainRouting {
 	 * @return void
 	 */
 	protected function domainRouting () {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		if ($this->routeGetRequestsOnly) {
 			trigger_error("[".get_class()."] Routing only GET requests with special media "
 			."site version or localization conditions is not allowed in module router.", 
 			E_USER_WARNING);
 			$this->routeGetRequestsOnly = FALSE;
 		}
-		/** @var $route \MvcCore\Ext\Routers\Modules\Route */
+		/** @var \MvcCore\Ext\Routers\Modules\Route $route */
 		$allMatchedParams = [];
 		foreach ($this->domainRoutes as $route) {
 			$allMatchedParams = $route->Matches($this->request);
@@ -56,8 +58,7 @@ trait DomainRouting {
 	 * @return void
 	 */
 	protected function domainRoutingSetRequestedAndDefaultParams (array & $allMatchedParams) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
-		/** @var $currentRoute \MvcCore\Route */
+		/** @var \MvcCore\Route $currentRoute */
 		$currentRoute = $this->currentDomainRoute;
 		$allMatchedParams[static::URL_PARAM_MODULE] = $currentRoute->GetModule();
 		$this->defaultParams = array_merge(
@@ -72,7 +73,6 @@ trait DomainRouting {
 	 * @return bool
 	 */
 	protected function domainRoutingFilterParams (array & $allMatchedParams) {
-		/** @var $this \MvcCore\Ext\Routers\Module */
 		$request = $this->request;
 		$defaultParamsBefore = array_merge([], $this->defaultParams);
 		$requestParams = array_merge([], $this->defaultParams);

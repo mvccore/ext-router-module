@@ -13,6 +13,9 @@
 
 namespace MvcCore\Ext\Routers\Module;
 
+/**
+ * @mixin \MvcCore\Ext\Routers\Module
+ */
 trait DomainRouteSetUp {
 
 	/**
@@ -24,6 +27,6 @@ trait DomainRouteSetUp {
 	 * @return void
 	 */
 	protected function domainRoutingSetUpRouterByDomainRoute () {
-		/** @var $this \MvcCore\Ext\Routers\Module */
+		/** @var \MvcCore\Ext\Routers\Module $this */
 	}
 }

@@ -25,10 +25,10 @@ extends		\MvcCore\Router
 implements	\MvcCore\Ext\Routers\IModule,
 			\MvcCore\Ext\Routers\IExtended {
 
-	use \MvcCore\Ext\Routers\Extendeds\PropsGettersSetters;
-	use \MvcCore\Ext\Routers\Extendeds\Preparing;
-	use \MvcCore\Ext\Routers\Extendeds\RedirectHelpers;
-	use \MvcCore\Ext\Routers\Extendeds\Url;
+	use \MvcCore\Ext\Routers\Extended\PropsGettersSetters;
+	use \MvcCore\Ext\Routers\Extended\Preparing;
+	use \MvcCore\Ext\Routers\Extended\RedirectHelpers;
+	use \MvcCore\Ext\Routers\Extended\Url;
 	
 	use \MvcCore\Ext\Routers\Module\Canonical;
 	use \MvcCore\Ext\Routers\Module\DomainRouteSetUp;

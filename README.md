@@ -82,7 +82,7 @@ $app = \MvcCore\Application::GetInstance();
 $app->SetRouterClass('\MvcCore\Ext\Routers\Module');
 ...
 // to get router instance for next configuration:
-/** @var $router \MvcCore\Ext\Routers\Module */
+/** @var \MvcCore\Ext\Routers\Module $router */
 $router = \MvcCore\Router::GetInstance();
 ```
 
