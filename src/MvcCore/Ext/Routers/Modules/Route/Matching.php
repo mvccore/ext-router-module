@@ -30,7 +30,7 @@ trait Matching {
 	 */
 	protected function matchesGetSubject (\MvcCore\IRequest $request) {
 		$subject = $this->matchesGetSubjectHostAndBase($request) ;
-		if (!$this->flags[0]) 
+		if (($this->flags & static::FLAG_SCHEME_NO) != 0) 
 			throw new \InvalidArgumentException(
 				"[".get_class()."] Domain route pattern or reverse must be defined as "
 				."absolute with `//`, `http://` or `https://` at the beginning (`//www.domain.com`)."	
