@@ -26,7 +26,7 @@ trait Instancing {
 	 * namespace, params default values and constraints.
 	 * Example:
 	 * `new \MvcCore\Ext\Routers\Modules\Route([
-	 *		"pattern"				=> "//blog.%sld%.%tld%",
+	 *		"pattern"				=> "//blog.%sld%.%tld%[/<page>]",
 	 *		"module"				=> "blog",
 	 *		"namespace"				=> "Blog",
 	 *		"defaults"				=> ["page" => 1],
@@ -36,7 +36,7 @@ trait Instancing {
 	 * ]);`
 	 * or:
 	 * `new \MvcCore\Ext\Routers\Modules\Route(
-	 *		"//blog.%sld%.%tld%",
+	 *		"//blog.%sld%.%tld%[/<page>]",
 	 *		"blog",			"Blog",
 	 *		["page" => 1],	["page" => "\d+"],
 	 *		[
@@ -46,8 +46,8 @@ trait Instancing {
 	 * );`
 	 * or:
 	 * `new \MvcCore\Ext\Routers\Modules\Route([
-	 *		"match"					=> "#^//blog\.%sld%\.%tld%$#",
-	 *		"reverse"				=> "//blog.%sld%.%tld%",
+	 *		"match"					=> "#^//blog\.%sld%\.%tld%[/<page>]$#",
+	 *		"reverse"				=> "//blog.%sld%.%tld%/<page>",
 	 *		"module"				=> "blog",
 	 *		"namespace"				=> "Blog",
 	 *		"defaults"				=> ["page" => 1],
@@ -55,39 +55,52 @@ trait Instancing {
 	 *		"allowedLocalizations"	=> ["en-US"],
 	 *		"allowedMediaVersions"	=> ["full" => ""]
 	 * ]);`
-	 * @param string|array	$patternOrConfig
-	 *						Required, configuration array or route pattern value 
-	 *						to parse into match and reverse patterns.
-	 * @param string		$module 
-	 *						Required, application module name. Equivalent for 
-	 *						classic route name.
-	 * @param string		$namespace 
-	 *						Optional, target controllers namespace, applied to 
-	 *						routed controller by classic route if target 
-	 *						controller is not defined absolutely.
-	 * @param array			$defaults
-	 *						Optional, default param values like: 
-	 *						`["name" => "default-name", "page" => 1]`.
-	 * @param array			$constraints
-	 *						Optional, params regular expression constraints for
-	 *						regular expression match function if no `"match"` 
-	 *						property in config array as first argument defined.
-	 * @param array			$advancedConfiguration
-	 *						Optional, http method to only match requests by this 
-	 *						method. If `NULL` (by default), request with any http 
-	 *						method could be matched by this route. Given value is 
-	 *						automatically converted to upper case.
+	 * @param string|array<string,mixed> $pattern
+	 * Required, configuration array or route pattern value
+	 * to parse into match and reverse patterns.
+	 * @param string|NULL                $controllerAction
+	 * Optional, controller and action name in pascal case
+	 * like: `"Products:List"`.
+	 * @param string|NULL                $module 
+	 * Required, application module name. Equivalent for 
+	 * classic route name.
+	 * @param string|NULL                $namespace 
+	 * Optional, target controllers namespace, applied to 
+	 * routed controller by classic route if target 
+	 * controller is not defined absolutely.
+	 * @param array<string,mixed>|NULL   $defaults
+	 * Optional, default param values like:
+	 * `["name" => "default-name", "page" => 1]`.
+	 * @param array<string,string>|NULL  $constraints
+	 * Optional, params regular expression constraints for
+	 * regular expression match function if no `"match"` 
+	 * property in config array as first argument defined.
+	 * @param array<string,mixed>        $config
+	 * Optional, array with adwanced configuration.
+	 * There could be defined:
+	 * - string   `method`   HTTP method name. If `NULL` (by default), 
+	 *                       request with any http method could be matched 
+	 *                       by this route. Given value is automatically 
+	 *                       converted to upper case.
+	 * - string   `redirect` Redirect route name.
+	 * - bool     `absolute` Absolutize URL.
+	 * - callable `in`       URL filter in, callable accepting arguments:
+	 *                       `array $params, array $defaultParams, \MvcCore\Request $request`.
+	 * - callable `out`      URL filter out, callable accepting arguments:
+	 *                       `array $params, array $defaultParams, \MvcCore\Request $request`.
 	 * @return void
 	 */
 	public function __construct (
-		$patternOrConfig = NULL,
+		$pattern = NULL,
 		$module = NULL,
 		$namespace = NULL,
-		$defaults = [],
-		$constraints = [],
-		$advancedConfiguration = []
+		$defaults = NULL,
+		$constraints = NULL,
+		$config = []
 	) {
 		if (count(func_get_args()) === 0) return;
+		$patternOrConfig = $pattern;
+		$advancedConfiguration = $config;
 		// init pattern, match, reverse, module, namespace, defaults, constraints and filters
 		if (is_array($patternOrConfig)) {
 			$data = (object) $patternOrConfig;
