@@ -73,7 +73,7 @@ trait UrlDomain {
 		$params = array_diff_key($params, $domainParamsDefault);
 		$defaultDomainParams = array_merge([], $this->GetDefaultParams() ?: []);
 		list($domainUrlBaseSection,) = $targetDomainRoute->Url(
-			$this->request, $domainParams, $defaultDomainParams, '', TRUE
+			$this->request, $domainParams, $defaultDomainParams, TRUE, ''
 		);
 		return $domainUrlBaseSection;
 	}

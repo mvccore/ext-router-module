@@ -50,7 +50,7 @@ trait Redirect {
 				$this->redirectCorrectDomainSystemParams($domainParams);
 
 			list($domainUrlBaseSection,) = $this->currentDomainRoute->Url(
-				$request, $domainParams, $defaultDomainParams, ''
+				$request, $domainParams, $defaultDomainParams, FALSE, ''
 			);
 		} else {
 			$domainUrlBaseSection = NULL;

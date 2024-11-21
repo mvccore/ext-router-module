@@ -52,7 +52,7 @@ trait Canonical {
 			$domainParams = array_intersect_key($requestedParamsClone, $this->requestedDomainParams);
 			$requestedParamsClone = array_diff_key($requestedParamsClone, $this->requestedDomainParams);
 			list($domainUrlBaseSection,) = $targetDomainRoute->Url(
-				$this->request, $domainParams, $this->requestedDomainParams, '', TRUE
+				$this->request, $domainParams, $this->requestedDomainParams, TRUE, ''
 			);
 			if (mb_strpos($domainUrlBaseSection, '//') === FALSE)
 				$domainUrlBaseSection = $request->GetDomainUrl() . $domainUrlBaseSection;
@@ -89,10 +89,10 @@ trait Canonical {
 			$defaultParamsClone = array_diff_key($defaultParams, $this->requestedDomainParams);
 			$requestedParamsClone = array_diff_key($this->requestedParams, $this->requestedDomainParams);
 			list($domainUrlBaseSection,) = $targetDomainRoute->Url(
-				$this->request, $domainParams, $defaultParams, '', TRUE
+				$this->request, $domainParams, $defaultParams, TRUE, ''
 			);
 			list($selfUrlDomainAndBasePart, $selfUrlPathAndQueryPart) = $this->currentRoute->Url(
-				$request, $requestedParamsClone, $defaultParamsClone, $this->getQueryStringParamsSepatator(), TRUE
+				$request, $requestedParamsClone, $defaultParamsClone, TRUE
 			);
 
 			if (mb_strpos($domainUrlBaseSection, '//') === FALSE)
@@ -104,7 +104,7 @@ trait Canonical {
 		} else {
 			$domainUrlBaseSection = NULL;
 			list($selfUrlDomainAndBasePart, $selfUrlPathAndQueryPart) =  $this->currentRoute->Url(
-				$request, $this->requestedParams, $defaultParams, $this->getQueryStringParamsSepatator(), TRUE
+				$request, $this->requestedParams, $defaultParams, TRUE
 			);
 			if (mb_strpos($selfUrlDomainAndBasePart, '//') === FALSE)
 				$selfUrlDomainAndBasePart = $request->GetDomainUrl() . $selfUrlDomainAndBasePart;
